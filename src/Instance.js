@@ -7,16 +7,14 @@ class Instance {
             channels: [
                 {
                     name: "┋💬・chat",
-                    services: ['goodnight', 'questions']
                 },
             ]
         };
     }
 
     init() {
-        this.DAL.insertGuild(this.guild.id, this.guild.name);
+        //this.DAL.insertGuild(this.guild.id, this.guild.name);
         this._setup();
-        this._startServices();
     }
 
     _isAllowedChannel(channelname) {

@@ -10,7 +10,11 @@ class InstanceManager {
         this.isDev = process.argv.includes("--dev");
         this.client = new Discord.Client({ 
             partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
-            intents: ['DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILDS', 'GUILD_MEMBERS', 'GUILD_VOICE_STATES']
+            intents: [
+                Discord.GatewayIntentBits.GuildMessages,
+                Discord.GatewayIntentBits.Guilds,
+                Discord.GatewayIntentBits.GuildMembers
+            ]
         });
 
         this.sessions = new Map();
