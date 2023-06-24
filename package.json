@@ -1,0 +1,16 @@
+{
+  "name": "bo-shodan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bo-shodan.js",
+  "scripts": {
+    "start": "node bo-shodan.js",
+    "dev": "node bo-shodan.js --dev",
+    "clean": "npm cache clean --force"
+  },
+  "author": "VF",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.11.0"
+  }
+}
