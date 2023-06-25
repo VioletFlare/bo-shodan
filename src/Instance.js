@@ -1,3 +1,5 @@
+const Scraper = require("./Services/Scraper/Scraper");
+
 class Instance {
 
     constructor(guild, DAL) {
@@ -30,6 +32,8 @@ class Instance {
     }
 
     _setup() {
+        Scraper.init();
+
         this.channel = this.guild.channels.cache.find(
             channel => {
                 const isAllowedChannel = this._isAllowedChannel(channel.name);
