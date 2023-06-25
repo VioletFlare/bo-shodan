@@ -3,15 +3,18 @@ const cheerio = require("cheerio");
 
 class SimpleScraper {
   scrap(source) {
-    axios
+    return new Promise(resolve => {
+      axios
       .get(source.url)
       .then((response) => {
         const $ = cheerio.load(response.data);
-        source.run($);
+        const data = source.run($);
+        ressolve(data);
       })
       .catch((error) => {
         console.error(error);
       });
+    })
   }
 }
 

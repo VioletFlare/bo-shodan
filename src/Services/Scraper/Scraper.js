@@ -2,12 +2,12 @@ const SimpleScraper = require('./Modules/SimpleScraper');
 const MagazineUniboIT = require("./Sources/magazine.unibo.it");
 
 class Scraper {
-    scheduleTask() {
-        SimpleScraper.scrap(MagazineUniboIT);
-      }
+    simpleScrap(source) {
+        return SimpleScraper.scrap(source);
+    }
     
-    init() {
-        this.scheduleTask();
+    start() {
+        this.simpleScrap(MagazineUniboIT);
     }
 }
 

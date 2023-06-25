@@ -17,14 +17,29 @@ class MagazineUniboIT {
   }
 
   _getOtherMainPosts($) {
-    const posts = $(".row.main-posts w9 a");
+    const otherMainPosts = [];
+
+    const posts = $(".row.main-posts .w9 a").each((i, el) => {
+      const url = $(el).attr('href');
+      const img = $('img', el).attr('src');
+      const title = $('h2', el).text();
+      const description = $('.occhiello', el).text();
+
+      otherMainPosts.push({
+        url, img, title, description
+      })
+    });
+
+    return otherMainPosts;
   }
 
   run($) {
     const mainPost = this._getMainPost($);
+    const otherMainPosts = this._getOtherMainPosts($);
 
     return [
-        mainPost
+        mainPost,
+        ...otherMainPosts
     ]
   }
 }

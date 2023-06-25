@@ -1,4 +1,7 @@
 const Scraper = require("./Services/Scraper/Scraper");
+const EventEmitter = require('events');
+const Engine = require('./Engine/Engine');
+const NewsPublisher = require('./Services/NewsPublisher');
 
 class Instance {
 
@@ -12,6 +15,7 @@ class Instance {
                 },
             ]
         };
+        this.$B = new EventEmitter(); 
     }
 
     init() {
@@ -31,9 +35,11 @@ class Instance {
         return isAllowedChannel;
     }
 
-    _setup() {
-        Scraper.init();
+    _startServices() {
+        new NewsPublisher(this.config, this.channel, this.$B).start();
+    }
 
+    _setup() {
         this.channel = this.guild.channels.cache.find(
             channel => {
                 const isAllowedChannel = this._isAllowedChannel(channel.name);
@@ -42,6 +48,8 @@ class Instance {
                 return isCorrectChannel;
             }
         );
+
+        this.engine = new Engine(this.$B);
     }
 
     _handleChatInputCommand(interaction) {
