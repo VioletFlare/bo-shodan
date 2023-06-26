@@ -50,6 +50,7 @@ class Instance {
         );
 
         this.engine = new Engine(this.$B);
+        this.engine.init();
     }
 
     _handleChatInputCommand(interaction) {

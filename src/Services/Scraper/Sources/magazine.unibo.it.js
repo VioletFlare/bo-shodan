@@ -1,6 +1,6 @@
 //https://magazine.unibo.it/
 
-class MagazineUniboIT {
+class MagazineUniboITHome {
   constructor() {
     this.url = "https://magazine.unibo.it/";
   }
@@ -44,4 +44,4 @@ class MagazineUniboIT {
   }
 }
 
-module.exports = new MagazineUniboIT();
+module.exports = new MagazineUniboITHome();
