@@ -8,19 +8,19 @@ class Engine {
     this.jobs = [];
   }
 
-  _runJob(self, response) {
+  _runJob(self, source, response) {
     self.stop();
 
-    this._scheduleHourlyScraping(source);
+    this._scheduleScraping(source);
   }
 
   _handle(self, source) {
     Scraper.simpleScrap(source).then(
-        (response) => this._runJob(self, response)
+        (response) => this._runJob(self, source, response)
     );
   }
 
-  _scheduleHourlyScraping(source) {
+  _scheduleScraping(source) {
     const second = Math.floor(Math.random() * 60);
     const minute = Math.floor(Math.random() * 60);
     const pattern = `${second} ${minute} * * * *`;
@@ -37,7 +37,7 @@ class Engine {
   }
 
   init() {
-    this._scheduleHourlyScraping(SourcesIndex.MagazineUniboITHome);
+    this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
     this._handle(new CronJob('* * * * * *'), SourcesIndex.MagazineUniboITHome);
   }
 }
