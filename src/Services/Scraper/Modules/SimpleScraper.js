@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const UserAgent = require('user-agents');
 
 class SimpleScraper {
-  _makeRequest(resolve, source, config) {
+  _getHome(resolve, source) {
 	const userAgent = new UserAgent({ deviceCategory: 'mobile' }).toString();
 
 	axios
@@ -18,10 +18,36 @@ class SimpleScraper {
 	});
   }
 
-  scrap(source, config) {
+  _getArticle(resolve, source, homeData) {
+	const userAgent = new UserAgent({ deviceCategory: 'mobile' }).toString();
+
+	axios
+	.get(source.url, { headers: { 'User-Agent': userAgent } })
+	.then((response) => {
+	  const $ = cheerio.load(response.data);
+	  const data = source.run($);
+
+	  const newData = {...data, ...homeData};
+
+	  resolve(newData);
+	})
+	.catch((error) => {
+	  console.error(error);
+	});
+  }
+
+  scrap(source) {
     return new Promise(resolve => {
-		this._makeRequest(resolve, source, config)
-    }).then()
+		this._getHome(resolve, source);
+    }).then(homeData => {
+		if (source.article) {
+			return new Promise(resolve => {
+				this._getArticle(resolve, new source.article(homeData.url), homeData);
+			});
+		} else {
+			return homeData;
+		}
+	})
   }
 }
 
