@@ -5,8 +5,16 @@ class AnsaITArticle {
 	}
 
 	run($) {
+		let content = '';
+		
+		const paragraphs = $('.news-txt p');
+
+		paragraphs.each((i, paragraph) => {
+			content += $(paragraph).text();
+		})
+
 		return {
-			content: $('.news-txt').text()
+			content: content
 		}
 	}
 

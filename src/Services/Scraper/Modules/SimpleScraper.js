@@ -18,7 +18,7 @@ class SimpleScraper {
 	});
   }
 
-  _getArticle(resolve, source, homeData) {
+  _getArticle(resolve, source, articleData) {
 	const userAgent = new UserAgent({ deviceCategory: 'mobile' }).toString();
 
 	axios
@@ -27,7 +27,7 @@ class SimpleScraper {
 	  const $ = cheerio.load(response.data);
 	  const data = source.run($);
 
-	  const newData = {...data, ...homeData};
+	  const newData = {...data, ...articleData};
 
 	  resolve(newData);
 	})
@@ -41,9 +41,16 @@ class SimpleScraper {
 		this._getHome(resolve, source);
     }).then(homeData => {
 		if (source.article) {
-			return new Promise(resolve => {
-				this._getArticle(resolve, new source.article(homeData.url), homeData);
+			const promises = [];
+
+			homeData.forEach(articleData => {
+				promises.push(new Promise(resolve => {
+					this._getArticle(resolve, new source.article(articleData.url), articleData);
+				}));
 			});
+
+			return Promise.all(promises);
+
 		} else {
 			return homeData;
 		}
