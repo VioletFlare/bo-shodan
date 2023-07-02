@@ -39,7 +39,7 @@ class Engine {
   init() {
     this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
     this._scheduleScraping(SourcesIndex.AnsaITHome);
-	  this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITHome);
+    this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
   }
 }
 
