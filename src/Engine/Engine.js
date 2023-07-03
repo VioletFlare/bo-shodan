@@ -11,7 +11,7 @@ class Engine {
   _runJob(self, source, response) {
     self.stop();
 
-    this._scheduleScraping(source);
+    this.$B.emit('Engine::ScheduleScraping', source);
   }
 
   _handle(self, source) {
@@ -37,11 +37,17 @@ class Engine {
   }
 
   init() {
+    this.$B.on('Engine::ScheduleScraping', (source) => {
+      this._scheduleScraping(source);
+    })
+
     //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
     this._scheduleScraping(SourcesIndex.AnsaITHome);
     this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
-    this._handle(new CronJob('* * * * * *'), SourcesIndex.IlRestoDelCarlinoITBologna);
+    this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna)
+
+    this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITEmiliaRomagna);
   }
 }
 

@@ -40,7 +40,7 @@ class AnsaITHome {
 		const url = this.url + $('h3 a', el).attr('href');
 		const img = this.url + $('img', el).data('src');
 		const title = $('h3', el).text(); 
-		const description = $('.pp-abs p').text();
+		const description = $('.pp-abs p', el).text();
 
 		otherMainPosts.push({
 			url, img, title, description
