@@ -44,10 +44,14 @@ class Engine {
     //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
     this._scheduleScraping(SourcesIndex.AnsaITHome);
+    this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
     this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna)
-
-    this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITEmiliaRomagna);
+    
+    /*
+      Detects simple scraping attempts:
+      SourcesIndex.RainewsITHome
+    */
   }
 }
 

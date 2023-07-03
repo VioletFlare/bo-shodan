@@ -3,11 +3,13 @@ const AnsaITHome = require("./Sources/ansa.it");
 const AnsaITEmiliaRomagna = require("./Sources/ansa.it-emiliaromagna");
 const BolognaTodayITHome = require("./Sources/bolognatoday.it");
 const IlRestoDelCarlinoITBologna = require('./Sources/ilrestodelcarilno.it-bologna');
+const RainewsITHome = require("./Sources/rainews.it");
 
 module.exports = {
     MagazineUniboITHome: MagazineUniboITHome,
 	AnsaITHome: AnsaITHome,
     AnsaITEmiliaRomagna: AnsaITEmiliaRomagna,
     BolognaTodayITHome: BolognaTodayITHome,
-    IlRestoDelCarlinoITBologna: IlRestoDelCarlinoITBologna
+    IlRestoDelCarlinoITBologna: IlRestoDelCarlinoITBologna,
+    RainewsITHome: RainewsITHome
 }

@@ -19,7 +19,7 @@ class MagazineUniboITHome {
   _getOtherMainPosts($) {
     const otherMainPosts = [];
 
-    const posts = $(".row.main-posts .w9 a").each((i, el) => {
+    $(".row.main-posts .w9 a").each((i, el) => {
       const url = $(el).attr('href');
       const img = $('img', el).attr('src');
       const title = $('h2', el).text();
