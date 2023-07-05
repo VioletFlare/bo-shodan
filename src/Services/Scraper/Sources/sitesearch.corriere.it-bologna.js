@@ -1,19 +1,27 @@
-class CorriereITSiteSearchBologna {
+const CorriereITArticle = require('./corriere.it-article');
 
+class CorriereITSiteSearchBologna {
     constructor() {
-        this.url = 'https://sitesearch.corriere.it/forward.jsp?q=bologna'
+        this.url = 'https://sitesearch.corriere.it/forward.jsp?q=bologna';
+		this.article = CorriereITArticle;
+		this.encoding = 'latin1' //ISO-8859-1
     }
 
     _getSearchResults($) {
-       const searchResults = $(".ricerca-web > div:not(#ris-ricerca):not(.more-news-search):not(#loadingDiv):not(#pager-ricerca)");
+        const allSearchResults = [];
+        const searchResults = $(
+            '.ricerca-web > div:not(#ris-ricerca):not(.more-news-search):not(#loadingDiv):not(#pager-ricerca)'
+        );
 
-       searchResults.each((i, result) => {
+        searchResults.each((i, result) => {
             const url = $('a', result).attr('href');
-       })
 
-       return {
-        url: url
-       }
+			allSearchResults.push({
+				url: url
+			});
+        });
+
+        return allSearchResults;
     }
 
     run($) {
@@ -21,7 +29,6 @@ class CorriereITSiteSearchBologna {
 
         return searchResults;
     }
-
 }
 
 module.exports = new CorriereITSiteSearchBologna();

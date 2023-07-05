@@ -37,9 +37,13 @@ class Engine {
   }
 
   init() {
-    this.$B.on('Engine::ScheduleScraping', (source) => {
-      this._scheduleScraping(source);
-    })
+	if (this.$B) {
+		this.$B.on('Engine::ScheduleScraping', (source) => {
+			this._scheduleScraping(source);
+		})
+	} else {
+		console.warn('WARN: Message bus is not present. Scraping will not be scheduled.')
+	}
 
     //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
@@ -47,7 +51,8 @@ class Engine {
     this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
     this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna)
-    
+    this._handle(new CronJob('* * * * * *'), SourcesIndex.CorriereITSiteSearchBologna);
+	
     /*
       Detects simple scraping attempts:
       SourcesIndex.RainewsITHome
