@@ -4,10 +4,34 @@ const UserAgent = require('user-agents');
 const iconv = require('iconv-lite');
 
 class SimpleScraper {
-    _getHome(resolve, source) {
+    _getUserAgent(source) {
+        let device = 'mobile';
+        
+        if (source.device) {
+            device = source.device;
+        }
+
         const userAgent = new UserAgent({
-            deviceCategory: 'mobile'
+            deviceCategory: device
         }).toString();
+
+        return userAgent;
+    }
+
+    _decodeResponse(encodedData, source) {
+        let decodedData;
+
+        if (source.encoding) {
+            decodedData = iconv.decode(encodedData, source.encoding);
+        } else {
+            decodedData = iconv.decode(encodedData, 'utf8');
+        }
+
+        return decodedData;
+    }
+
+    _getHome(resolve, source) {
+        const userAgent = this._getUserAgent(source);
 
         axios
             .get(source.url, {
@@ -16,13 +40,7 @@ class SimpleScraper {
                 responseEncoding: 'binary'
             })
             .then((response) => {
-				let unparsedData;
-
-				if (source.encoding) {
-					unparsedData = iconv.decode(response.data, source.encoding);
-				} else {
-					unparsedData = iconv.decode(response.data, 'utf8');
-				}
+				const unparsedData = this._decodeResponse(response.data, source);
 
                 const $ = cheerio.load(unparsedData);
                 const data = source.run($);
@@ -35,9 +53,7 @@ class SimpleScraper {
     }
 
     _getArticle(resolve, source, articleData) {
-        const userAgent = new UserAgent({
-            deviceCategory: 'mobile'
-        }).toString();
+        const userAgent = this._getUserAgent(source);
 
         axios
             .get(source.url, {
@@ -46,13 +62,7 @@ class SimpleScraper {
                 responseEncoding: 'binary'
             })
             .then((response) => {
-				let unparsedData;
-
-				if (source.encoding) {
-					unparsedData = iconv.decode(response.data, source.encoding);
-				} else {
-					unparsedData = iconv.decode(response.data, 'utf8');
-				}
+				const unparsedData = this._decodeResponse(response.data, source);
 
                 const $ = cheerio.load(unparsedData);
                 const data = source.run($);

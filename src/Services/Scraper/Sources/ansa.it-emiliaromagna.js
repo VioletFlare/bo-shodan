@@ -17,6 +17,8 @@ class AnsaITEmiliaRomagna {
 
             let img;
 
+            const title = $('h3', el).text().replace('\n', '').trim();
+
             if (imgDataSrc) {
                 img = this.resourceUrl + imgDataSrc;
             } else if ($imgEl.attr('src')) {
@@ -25,12 +27,13 @@ class AnsaITEmiliaRomagna {
                 img = '';
             }
 
-            const title = $('h3', el).text().replace('\n', '').trim(); 
             let description = $('.pp-abs p', el).text();
 
             if (!description) {
                 description = $('.pp-abs', el).text();
             }
+
+            description = description.trim();
     
             allArticles.push({
                 url, img, title, description
