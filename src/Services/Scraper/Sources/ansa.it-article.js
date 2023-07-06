@@ -10,7 +10,7 @@ class AnsaITArticle {
 		const paragraphs = $('.news-txt p');
 
 		paragraphs.each((i, paragraph) => {
-			content += $(paragraph).text();
+			content += $(paragraph).text().trim();
 		})
 
 		return {
