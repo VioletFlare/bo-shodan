@@ -37,7 +37,7 @@ class IlRestoDelCarlinoITBologna {
     }
 
     run($) {
-        this._getAllArticles($);
+        return this._getAllArticles($);
     }
 
 }
