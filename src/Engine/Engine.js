@@ -52,7 +52,7 @@ class Engine {
     this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
     this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna);
     this._scheduleScraping(SourcesIndex.CorriereITSiteSearchBologna);
-    this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITEmiliaRomagna);
+    this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     /*
       Detects simple scraping attempts:
       SourcesIndex.RainewsITHome

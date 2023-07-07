@@ -6,22 +6,42 @@ class BolognaTodayITHome {
 
     _getAllArticles($) {
         const allArticles = [];
-        const articles = $('article');
+        const all = $('article');
+
+        const articles = all.filter(":not([data-theme='today'] article)")
 
         articles.each((i, article) => {
-            const url = this.url + $('.o-link-text', article).attr('href');
+            let href = $('.o-link-text', article).attr('href');
+            let url = '';
 
-            const imgUrl =  $('.c-story__media source', article).attr('srcset');
+            if (href.indexOf('//') === 0) {
+                url = 'https:' + href;
+            } else {    
+                url = this.url + href;
+            }
+
+            let imgUrl =  $('.c-story__media source', article).attr('srcset');
+
+            if (!imgUrl) {
+                imgUrl = $('.c-story__media img', article).attr('src');
+            }
             
             let img = '';
 
-            if (imgUrl && !imgUrl.includes('https://')) {
-                const img = 'https:' + imgUrl;
-            } else {
+            const shouldCompleteUrl = imgUrl && !imgUrl.includes('https://');
+
+            if (shouldCompleteUrl) {
+                img = 'https:' + imgUrl;
+            } else if (imgUrl) {
                 img = imgUrl;
             }
 
-            const title = $('.c-story__content h1', article).text().replace('\n', '').trim();
+            let title = $('.c-story__content h1', article).text().replace('\n', '').trim();
+
+            if (!title) {
+                title = $('.c-story__header h1', article).text().replace('\n', '').trim();
+            }
+
             const description = $('.c-story__summary', article).text().replace('\n', '').trim();
 
             allArticles.push({

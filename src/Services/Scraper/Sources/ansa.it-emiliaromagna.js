@@ -7,7 +7,10 @@ class AnsaITEmiliaRomagna {
 
     _getAllArticles($) {
         const allArticles = [];
-        const articles = $('article');
+  
+        const all = $("article");
+
+        const articles = all.filter(":not(.hidden-phone article)");
 
         articles.each((i, el) => {
             const url = this.resourceUrl + $('h3 a', el).attr('href');
@@ -31,6 +34,10 @@ class AnsaITEmiliaRomagna {
 
             if (!description) {
                 description = $('.pp-abs', el).text();
+
+                if (!description) {
+                    description = $('.news-abs', el).text();
+                }
             }
 
             description = description.trim();
