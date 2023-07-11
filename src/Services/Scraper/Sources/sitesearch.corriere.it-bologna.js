@@ -1,4 +1,4 @@
-const CorriereITArticle = require('./corriere.it-article');
+const CorriereITArticle = require('./corriere.it-article.js');
 
 class CorriereITSiteSearchBologna {
     constructor() {

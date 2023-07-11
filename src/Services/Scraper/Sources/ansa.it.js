@@ -1,5 +1,5 @@
-const Scraper = require("../Scraper");
-const AnsaITArticle = require("./ansa.it-article");
+const Scraper = require("../Scraper.js");
+const AnsaITArticle = require("./ansa.it-article.js");
 
 class AnsaITHome {
   constructor() {

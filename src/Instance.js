@@ -1,7 +1,7 @@
-const Scraper = require("./Services/Scraper/Scraper");
+const Scraper = require("./Services/Scraper/Scraper.js");
 const EventEmitter = require('events');
-const Engine = require('./Engine/Engine');
-const NewsPublisher = require('./Services/NewsPublisher');
+const Engine = require('./Engine/Engine.js');
+const NewsPublisher = require('./Services/NewsPublisher.js');
 
 class Instance {
 
