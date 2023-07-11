@@ -1,4 +1,4 @@
-const SimpleScraper = require('./Modules/SimpleScraper');
+const SimpleScraper = require('./Modules/SimpleScraper.js');
 
 class Scraper {
     simpleScrap(source) {

@@ -1,6 +1,7 @@
-const Scraper = require("../Services/Scraper/Scraper");
-const SourcesIndex = require("../Services/Scraper/SourcesIndex");
+const Scraper = require("../Services/Scraper/Scraper.js");
+const SourcesIndex = require("../Services/Scraper/SourcesIndex.js");
 const CronJob = require("cron").CronJob;
+const DAL = require('../DAL/DAL.js');
 
 class Engine {
   constructor($B) {
@@ -11,6 +12,10 @@ class Engine {
   _runJob(self, source, response) {
     self.stop();
 
+    response.forEach(article => {
+      DAL.insertArticle(article);
+    });
+    
     this.$B.emit('Engine::ScheduleScraping', source);
   }
 
