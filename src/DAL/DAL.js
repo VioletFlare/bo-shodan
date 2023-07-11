@@ -3,7 +3,8 @@ const newsArticleRepository = require('../OM/NewsArticle.js');
 class DAL {
 
     insertArticle(article) {
-        newsArticleRepository.then(nar => nar.createAndSave(article))
+        article.metaScrapedAtTimestamp = new Date();
+        newsArticleRepository.then(nar => nar.createAndSave(article));
     }
 
     getArticle() {
@@ -11,3 +12,5 @@ class DAL {
     }
 
 }
+
+module.exports = new DAL();

@@ -1,7 +1,7 @@
 const Instance = require('./Instance.js');
 const config = require('../config.js');
 const Discord = require("discord.js");
-const DAL = require("./DAL/DataLayer.js");
+const DAL = require("./DAL/DAL.js");
 const CommandsInitializer = require('./CommandsInitializer.js');
 
 class InstanceManager {

@@ -11,7 +11,11 @@ class Engine {
 
   _runJob(self, source, response) {
     self.stop();
-    DAL.insertArticle(response);
+
+    response.forEach(article => {
+      DAL.insertArticle(article);
+    });
+    
     this.$B.emit('Engine::ScheduleScraping', source);
   }
 
