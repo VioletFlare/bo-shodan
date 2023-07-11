@@ -1,4 +1,5 @@
-//detects scraping
+//detects scraping??
+//one page application, should use puppetteer
 
 class RainewsITHome {
 
