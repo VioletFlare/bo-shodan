@@ -12,4 +12,8 @@ const newsArticleSchema = new Schema(NewsArticle, {
     metaScrapedAtTimestamp: { type: 'date' }
 });
 
-module.exports = client.then(c => c.fetchRepository(newsArticleSchema));
+module.exports = client.then(c => {
+    const newsArticleRepository = c.fetchRepository(newsArticleSchema);
+    newsArticleRepository.createIndex();
+    return newsArticleRepository;
+});
