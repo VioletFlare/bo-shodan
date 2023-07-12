@@ -13,7 +13,11 @@ class Engine {
     self.stop();
 
     response.forEach(article => {
-      DAL.insertArticle(article);
+      DAL.checkIfArticleExists(article.url).then(articleExists => {
+        if (!articleExists) {
+          DAL.insertArticle(article);
+        }
+      });
     });
     
     this.$B.emit('Engine::ScheduleScraping', source);

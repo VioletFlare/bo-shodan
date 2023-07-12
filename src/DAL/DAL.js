@@ -3,12 +3,19 @@ const newsArticleRepository = require('../OM/NewsArticle.js');
 class DAL {
 
     insertArticle(article) {
-        article.metaScrapedAtTimestamp = new Date();
-
         newsArticleRepository.then(nar => {
-            nar.search().where('url').equals(article.url).return.count().then((count) => {
+            article.metaScrapedAtTimestamp = new Date();
+            nar.createAndSave(article)
+        })
+    }
+
+    checkIfArticleExists(url) {
+        return newsArticleRepository.then(nar => {
+            nar.search().where('url').equals(url).return.count().then((count) => {
                 if (!count) {
-                    nar.createAndSave(article)
+                    return false;
+                } else {
+                    return true;
                 }
             });
         });
