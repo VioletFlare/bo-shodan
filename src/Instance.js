@@ -2,6 +2,7 @@ const Scraper = require("./Services/Scraper/Scraper.js");
 const EventEmitter = require('events');
 const Engine = require('./Engine/Engine.js');
 const NewsPublisher = require('./Services/NewsPublisher.js');
+const DAL = require('../DAL/DAL.js');
 
 class Instance {
 
@@ -19,7 +20,6 @@ class Instance {
     }
 
     init() {
-        //this.DAL.insertGuild(this.guild.id, this.guild.name);
         this._setup();
     }
 
@@ -49,7 +49,7 @@ class Instance {
             }
         );
 
-        this.engine = new Engine(this.$B);
+        this.engine = new Engine(this.$B, DAL);
         this.engine.init();
     }
 

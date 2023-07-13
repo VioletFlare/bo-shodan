@@ -9,7 +9,8 @@ const newsArticleSchema = new Schema(NewsArticle, {
     title: { type: 'text' },
     description: { type: 'text' },
     content: { type: 'text' },
-    metaScrapedAtTimestamp: { type: 'date' }
+    metaScrapedAtTimestamp: { type: 'date' },
+    metaPublishedOnDiscord: { type: 'boolean' }
 });
 
 module.exports = client.then(c => {
