@@ -61,7 +61,6 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
         this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna);
         this._scheduleScraping(SourcesIndex.CorriereITSiteSearchBologna);
-        this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     }
 }
 
