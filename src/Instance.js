@@ -12,7 +12,7 @@ class Instance {
         this.config = {
             channels: [
                 {
-                    name: "┋📰・news",
+                    name: "┋📰・notizie",
                 },
             ]
         };
