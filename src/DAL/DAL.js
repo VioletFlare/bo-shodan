@@ -12,7 +12,7 @@ class DAL {
 
     checkIfArticleExists(url) {
         return newsArticleRepository.then(nar => {
-            nar.search().where('url').equals(url).return.count().then((count) => {
+            return nar.search().where('url').equals(url).return.count().then((count) => {
                 if (!count) {
                     return false;
                 } else {
