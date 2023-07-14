@@ -4,9 +4,12 @@ class NewsEmbed {
 
     send(model) {
         const embed = new EmbedBuilder()
-            .setColor('#000000')
-            .setTitle(model.title)
-            .setURL(model.url)
+              .setColor('#000000')
+
+        if (model.title && model.url) {
+            embed.setTitle(model.title)
+                 .setURL(model.url)
+        }
 
         if (model.description) {
             embed.setDescription(model.description)
