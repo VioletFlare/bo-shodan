@@ -2,7 +2,7 @@ const Scraper = require("./Services/Scraper/Scraper.js");
 const EventEmitter = require('events');
 const Engine = require('./Engine/Engine.js');
 const NewsPublisher = require('./Services/NewsPublisher.js');
-const DAL = require('../DAL/DAL.js');
+const DAL = require('./DAL/DAL.js');
 
 class Instance {
 
