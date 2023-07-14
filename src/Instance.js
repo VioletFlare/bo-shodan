@@ -12,7 +12,7 @@ class Instance {
         this.config = {
             channels: [
                 {
-                    name: "┋💬・chat",
+                    name: "┋📰・news",
                 },
             ]
         };
@@ -43,11 +43,13 @@ class Instance {
         this.channel = this.guild.channels.cache.find(
             channel => {
                 const isAllowedChannel = this._isAllowedChannel(channel.name);
-                const isCorrectChannel = isAllowedChannel && channel.type === "GUILD_TEXT";
+                const isCorrectChannel = isAllowedChannel && channel.type === 0;
 
                 return isCorrectChannel;
             }
         );
+
+        this._startServices();
 
         this.engine = new Engine(this.$B, DAL);
         this.engine.init();

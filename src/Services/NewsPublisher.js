@@ -1,3 +1,5 @@
+const NewsEmbed = require('../Embeds/NewsEmbed');
+
 class NewsPublisher {
     
     constructor(config, channel, $B) {
@@ -7,17 +9,23 @@ class NewsPublisher {
     }
 
     start() {
-        this.$B.on("Engine::SendArticle", () => {
-            this._sendNewsEmbed();
+        this.$B.on("Engine::PublishArticle", (article) => {
+            this._sendNewsEmbed(article);
         })
     }
 
-    _sendNewsEmbed() {
+    _sendNewsEmbed(article) {
         const model = {
-            channel: this.channel
+            channel: this.channel,
+            url: article.url,
+            description: article.description,
+            img: article.img,
+            title: article.title
         };
 
-        NewsEmbed.send(model);
+        NewsEmbed.send(model).then(url => {
+            this.$B.emit("NewsPublisher::ArticlePublished", url);
+        });
     }
 
 }
