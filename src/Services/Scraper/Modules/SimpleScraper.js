@@ -2,6 +2,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const UserAgent = require('user-agents');
 const iconv = require('iconv-lite');
+const DAL = require('./../../../DAL/DAL.js');
 
 class SimpleScraper {
     _getUserAgent(source) {
@@ -55,25 +56,32 @@ class SimpleScraper {
     _getArticle(resolve, source, articleData) {
         const userAgent = this._getUserAgent(source);
 
-        axios
-            .get(source.url, {
-                headers: { 'User-Agent': userAgent },
-                responseType: 'arraybuffer',
-                responseEncoding: 'binary'
-            })
-            .then((response) => {
-				const unparsedData = this._decodeResponse(response.data, source);
+        DAL.checkIfArticleExists(articleData.url).then((articleExists) => {
+            if (!articleExists) {
+                axios
+                    .get(source.url, {
+                        headers: { 'User-Agent': userAgent },
+                        responseType: 'arraybuffer',
+                        responseEncoding: 'binary'
+                    })
+                    .then((response) => {
+                        const unparsedData = this._decodeResponse(response.data, source);
+        
+                        const $ = cheerio.load(unparsedData);
+                        const data = source.run($);
+        
+                        const newData = { ...data, ...articleData };
+        
+                        resolve(newData);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            } else {
+                resolve(articleData);
+            }
+        })
 
-                const $ = cheerio.load(unparsedData);
-                const data = source.run($);
-
-                const newData = { ...data, ...articleData };
-
-                resolve(newData);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     }
 
     scrap(source) {
