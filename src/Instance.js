@@ -49,10 +49,15 @@ class Instance {
             }
         );
 
-        this._startServices();
+        if (this.channel) {
+            this._startServices();
 
-        this.engine = new Engine(this.$B, DAL);
-        this.engine.init();
+            this.engine = new Engine(this.$B, DAL);
+            this.engine.init();
+        } else {
+            console.error(`Couldn\'t find any of the configured channels to write to on the server.`);
+        }
+
     }
 
     _handleChatInputCommand(interaction) {

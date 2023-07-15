@@ -1,6 +1,7 @@
 const Scraper = require("../Services/Scraper/Scraper.js");
 const SourcesIndex = require("../Services/Scraper/SourcesIndex.js");
 const CronJob = require("cron").CronJob;
+const CronParser = require('cron-parser');
 
 class ScrapingController {
 
@@ -33,17 +34,22 @@ class ScrapingController {
     }
   
     _scheduleScraping(source) {
-      const second = Math.floor(Math.random() * 60);
-      const minute = Math.floor(Math.random() * 60);
-      const pattern = `${second} ${minute} * * * *`;
-  
-      const cronJob = new CronJob(
-          pattern,
-          () => this._handle(cronJob, source),
-          null,
-          true,
-          "Europe/Rome"
+        const second = Math.floor(Math.random() * 60);
+        const minute = Math.floor(Math.random() * 60);
+        const pattern = `*/${second} */${minute} * * * *`;
+    
+        const cronJob = new CronJob(
+            pattern,
+            () => this._handle(cronJob, source),
+            null,
+            true,
+            "Europe/Rome"
         )
+
+        const interval = CronParser.parseExpression(cronJob.cronTime);
+        const runTime = new Date(interval.next()).toLocaleString("it-IT");
+
+        console.log('Scraping scheduled for: ' + source.url + ' at ' + runTime);
     }
   
 
