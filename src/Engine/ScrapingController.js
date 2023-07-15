@@ -32,10 +32,14 @@ class ScrapingController {
           (response) => this._runJob(self, source, response)
       );
     }
+
+    _getRandomArbitraryInteger(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
   
     _scheduleScraping(source) {
-        const second = Math.floor(Math.random() * 60);
-        const minute = Math.floor(Math.random() * 60);
+        const second = this._getRandomArbitraryInteger(1, 60);
+        const minute = this._getRandomArbitraryInteger(1, 60);
         const pattern = `*/${second} */${minute} * * * *`;
     
         const cronJob = new CronJob(
