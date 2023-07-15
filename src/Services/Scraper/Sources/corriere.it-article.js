@@ -22,7 +22,9 @@ class CorriereITArticle {
 			content = $('.content > *:not(.information-group):not(#ads_halfpage_mobile)').text().trim();
 		}
 
-		if (!img.includes('https://')) {
+		if (!img) {
+			img = '';
+		} else if (!img.includes('https://')) {
 			img = 'https:' + img;
 		}
 		
