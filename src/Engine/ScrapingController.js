@@ -60,6 +60,7 @@ class ScrapingController {
     }
 
     init() {
+        this._setEvents();
         //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
         this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
         //this._scheduleScraping(SourcesIndex.AnsaITHome);
