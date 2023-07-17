@@ -1,14 +1,18 @@
 const { EmbedBuilder } = require('discord.js');
+const NewsEmbedProperties = require('./NewsEmbedProperties');
 
 class NewsEmbed {
 
     send(model) {
-        const embed = new EmbedBuilder()
-              .setColor('#000000')
+        const embed = new EmbedBuilder();
 
         if (model.title && model.url) {
-            embed.setTitle(model.title)
+            const property = NewsEmbedProperties.getProperty(model.url);
+
+            embed.setAuthor({ name: property.name })
+                 .setTitle(model.title)
                  .setURL(model.url)
+                 .setColor(property.color)
         }
 
         if (model.description) {
