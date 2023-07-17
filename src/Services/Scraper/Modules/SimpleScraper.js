@@ -50,6 +50,7 @@ class SimpleScraper {
             })
             .catch((error) => {
                 console.error(error);
+                resolve(undefined);
             });
     }
 
@@ -76,6 +77,7 @@ class SimpleScraper {
                     })
                     .catch((error) => {
                         console.error(error);
+                        resolve(undefined)
                     });
             } else {
                 resolve(articleData);

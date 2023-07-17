@@ -12,18 +12,24 @@ class ScrapingController {
 
     _handleResponse(response) {
         response.forEach(article => {
-            this.DAL.checkIfArticleExists(article.url).then(articleExists => {
-                if (!articleExists) {
-                    this.DAL.insertArticle(article);
-                    this.$B.emit('Engine::PublishArticle', article);
-                }
-            });
+            if (article) {
+                this.DAL.checkIfArticleExists(article.url).then(articleExists => {
+                    if (!articleExists) {
+                        this.DAL.insertArticle(article);
+                        this.$B.emit('Engine::PublishArticle', article);
+                    }
+                });
+            }
         });
     }
   
     _runJob(self, source, response) {
       self.stop();
-      this._handleResponse(response);
+
+      if (response) {
+        this._handleResponse(response);
+      }
+      
       this.$B.emit('Engine::ScheduleScraping', source);
     }
   
@@ -72,6 +78,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
         this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna);
         this._scheduleScraping(SourcesIndex.CorriereITSiteSearchBologna);
+        this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
     }
 }
 
