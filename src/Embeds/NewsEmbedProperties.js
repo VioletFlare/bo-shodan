@@ -21,8 +21,11 @@ class EmbedProperties {
             'magazine.unibo.it': {
                 color: '#EA0C01',
                 name: 'UNIBO MAGAZINE'
+            },
+            'bolognaindiretta.it': {
+                color: '#c9081d',
+                name: 'Bolognaindiretta'
             }
-
         }
     }
 
