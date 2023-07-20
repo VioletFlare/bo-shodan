@@ -3,10 +3,10 @@ const newsArticleRepository = require('../OM/NewsArticle.js');
 class DAL {
 
     insertArticle(article) {
-        newsArticleRepository.then(nar => {
+        return newsArticleRepository.then(nar => {
             article.metaScrapedAtTimestamp = new Date();
             article.metaPublishedOnDiscord = false;
-            nar.createAndSave(article)
+            return nar.createAndSave(article)
         })
     }
 

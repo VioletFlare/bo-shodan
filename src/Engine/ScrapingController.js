@@ -15,8 +15,9 @@ class ScrapingController {
             if (article) {
                 this.DAL.checkIfArticleExists(article.url).then(articleExists => {
                     if (!articleExists) {
-                        this.DAL.insertArticle(article);
-                        this.$B.emit('Engine::PublishArticle', article);
+                        this.DAL.insertArticle(article).then((response) => {
+                            this.$B.emit('Engine::PublishArticle', article);
+                        });
                     }
                 });
             }
