@@ -32,8 +32,9 @@ class PublishingController {
         this.$B.on('NewsPublisher::ArticlePublished', (url) => {
           if (this.overdueArticlesToPublish[url]) {
             delete this.overdueArticlesToPublish[url];
-            this.DAL.markArticlePublished(url);
           }
+
+          this.DAL.markArticlePublished(url);
         })
     }
 
