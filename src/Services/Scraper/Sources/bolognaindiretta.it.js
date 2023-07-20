@@ -7,7 +7,11 @@ class AnsaITEmiliaRomagna {
     _getAllArticles($) {
         const allArticles = [];
   
-        const articles = $("article");
+        const all = $("article");
+
+        const articles = all.filter(`
+            :not(#video_tg article)
+        `);
 
         articles.each((i, article) => {
             let title = $('h2', article).text().replace('\n', '').trim();

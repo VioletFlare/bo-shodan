@@ -13,9 +13,9 @@ class AnsaITEmiliaRomagna {
         const all = $(".article-teaser");
 
         const articles = all.filter(`
-            .section-articles-stripe-video .article-teaser,
-            #ultima-ora .article-teaser, 
-            .section-promo-articles .article-teaser
+            :not(.section-articles-stripe-video .article-teaser),
+            :not(#ultima-ora .article-teaser), 
+            :not(.section-promo-articles .article-teaser)
         `);
 
         articles.each((i, article) => {
