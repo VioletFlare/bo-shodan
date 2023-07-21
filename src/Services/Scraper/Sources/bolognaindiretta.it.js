@@ -10,7 +10,7 @@ class AnsaITEmiliaRomagna {
         const all = $("article");
 
         const articles = all.filter(`
-            :not(#video_tg article)
+            :not(#video_tg article):not(#video_sport article)
         `);
 
         articles.each((i, article) => {
