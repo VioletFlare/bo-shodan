@@ -6,6 +6,7 @@ const RainewsITHome = require("./Sources/rainews.it.js");
 const CorriereITSiteSearchBologna = require('./Sources/sitesearch.corriere.it-bologna.js');
 const BolognaInDirettaIT = require('./Sources/bolognaindiretta.it.js');
 const BolognaRepubblicaIT = require('./Sources/bologna.repubblica.it.js');
+const NotizieVirgilioITBologna = require('./Sources/notizie.virgilio.it-bologna.js');
 
 module.exports = {
     MagazineUniboITHome: MagazineUniboITHome,
@@ -15,5 +16,6 @@ module.exports = {
     RainewsITHome: RainewsITHome,
     CorriereITSiteSearchBologna: CorriereITSiteSearchBologna,
     BolognaInDirettaIT: BolognaInDirettaIT,
-    BolognaRepubblicaIT: BolognaRepubblicaIT
+    BolognaRepubblicaIT: BolognaRepubblicaIT,
+    NotizieVirgilioITBologna: NotizieVirgilioITBologna
 }

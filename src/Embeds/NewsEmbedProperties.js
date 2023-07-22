@@ -29,6 +29,10 @@ class EmbedProperties {
             'repubblica.it': {
                 color: '#000000',
                 name: 'la Repubblica'
+            },
+            'virgilio.it': {
+                color: '#e74b18',
+                name: 'Notizie Virgilio'
             }
         }
     }

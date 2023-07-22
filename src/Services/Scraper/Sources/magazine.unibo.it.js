@@ -20,7 +20,7 @@ class MagazineUniboITHome {
     const otherMainPosts = [];
 
     $(".row.main-posts .w9 a").each((i, el) => {
-      const url = $(el).attr('href');
+      const url = $(el).attr('href').replace(/\?.+/, '');
       const img = $('img', el).attr('src');
       const title = $('h2', el).text();
       const description = $('.occhiello', el).text();
