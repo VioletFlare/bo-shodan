@@ -25,6 +25,10 @@ class EmbedProperties {
             'bolognaindiretta.it': {
                 color: '#c9081d',
                 name: 'Bolognaindiretta'
+            },
+            'repubblica.it': {
+                color: '#000000',
+                name: 'la Repubblica'
             }
         }
     }
@@ -40,7 +44,7 @@ class EmbedProperties {
         } else {
             property = {
                 name: 'Articolo',
-                color: '#000000'
+                color: '#FFFFFF'
             }
         }
 

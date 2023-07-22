@@ -79,6 +79,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna);
         this._scheduleScraping(SourcesIndex.CorriereITSiteSearchBologna);
         this._scheduleScraping(SourcesIndex.BolognaInDirettaIT);
+        this._scheduleScraping(SourcesIndex.BolognaRepubblicaIT);
     }
 }
 
