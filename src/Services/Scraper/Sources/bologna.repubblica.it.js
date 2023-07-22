@@ -16,7 +16,7 @@ class BolognaRepubblicaIT {
         `);
 
         articles.each((i, article) => {
-            let url = $('a', article).attr('href').replace(/\?/, '');
+            let url = $('a', article).attr('href').replace(/\?.+/, '');
             const title = $('h2', article).text().replace('\n', '').trim();
             const description = $('.entry__summary', article).text().replace('\n', '').trim();
             let img = $('img', article).attr('src');
@@ -29,10 +29,12 @@ class BolognaRepubblicaIT {
                 img = '';
             }
 
-            if (img && !img.includes('https://') || img.includes('gelestatic')) {
+            if (img.includes('gelestatic')) {
+                img = img.replace(/^.+(?=https:\/\/)/, '');
+            }
+
+            if (img && !img.includes('https://')) {
                 img = 'https:' + img;
-            } else {
-                img = '';
             }
 
             allArticles.push({
