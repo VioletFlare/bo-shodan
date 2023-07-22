@@ -31,6 +31,8 @@ class NewsEmbed {
             error => console.error(error)
         ).then(() => {
             return model.url;
+        }).catch(err => {
+            console.error(err);
         });
     }
 

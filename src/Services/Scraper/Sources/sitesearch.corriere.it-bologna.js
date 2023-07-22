@@ -14,7 +14,7 @@ class CorriereITSiteSearchBologna {
         );
 
         searchResults.each((i, result) => {
-            const url = $('a', result).attr('href');
+            const url = $('a', result).attr('href').replace(/\?.+/, '');
 
 			allSearchResults.push({
 				url: url

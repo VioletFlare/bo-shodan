@@ -11,7 +11,7 @@ class BolognaTodayITHome {
         const articles = all.filter(":not([data-theme='today'] article)")
 
         articles.each((i, article) => {
-            let href = $('.o-link-text', article).attr('href');
+            let href = $('.o-link-text', article).attr('href').replace(/\?.+/, '');
             let url = '';
 
             if (href.indexOf('//') === 0) {

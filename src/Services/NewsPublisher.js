@@ -23,8 +23,12 @@ class NewsPublisher {
             title: article.title
         };
 
-        NewsEmbed.send(model).then(url => {
+        NewsEmbed.send(model).catch(err => {
+            console.error(err)
+        }).then(url => {
             this.$B.emit("NewsPublisher::ArticlePublished", url);
+        }).catch(err => {
+            console.error(err)
         });
     }
 

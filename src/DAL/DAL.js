@@ -24,10 +24,11 @@ class DAL {
 
     markArticlePublished(url) {
         newsArticleRepository.then(nar => {
-            nar.search().where('url').equals(url).return.all().then((articles) => {
-                const article = articles[0];
-                article.metaPublishedOnDiscord = true;
-                nar.save(article);
+            nar.search().where('url').equals(url).all().then((articles) => {
+                articles.forEach(article => {
+                    article.metaPublishedOnDiscord = true;
+                    nar.save(article);
+                });
             });
         });
     }

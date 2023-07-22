@@ -6,7 +6,7 @@ class MagazineUniboITHome {
   }
 
   _getMainPost($) {
-    const url = $(".row.main-posts .w7 a").attr('href');
+    const url = $(".row.main-posts .w7 a").attr('href').replace(/\?.+/, '');
     const img = $(".row.main-posts .w7 img").attr('src');
     const title = $(".row.main-posts .w7 h1").text();
     const description = $(".row.main-posts .w7 .occhiello").text();

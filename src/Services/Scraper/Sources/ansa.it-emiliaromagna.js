@@ -19,7 +19,7 @@ class AnsaITEmiliaRomagna {
         `);
 
         articles.each((i, article) => {
-            const url = this.resourceUrl + $('.title a', article).attr('href');
+            const url = this.resourceUrl + $('.title a', article).attr('href').replace(/\?.+/, '');
             const title = $('.title a', article).text().replace('\n', '').trim();
             const description = $('.summary', article).text().replace('\n', '').trim();
             const srcset = $('img', article).attr('srcset');

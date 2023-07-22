@@ -28,7 +28,7 @@ class RainewsITHome {
         const allArticles = [];
 
         $('.launch-item--video').each((i, article) => {
-            const url = $(article).attr('href');
+            const url = $(article).attr('href').replace(/\?.+/, '');
             const img = $('img', article).attr('src');
             const title = $('h2', article).text();
             const description = $('.occhiello', article).text();
