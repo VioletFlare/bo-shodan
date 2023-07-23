@@ -10,16 +10,22 @@ class ScrapingController {
         this.DAL = DAL;
     }
 
+    _attemptArticleInsertion(article) {
+        this.DAL.checkIfArticleExists(article.url).then(articleExists => {
+            if (!articleExists) {
+                this.DAL.insertArticle(article).then((response) => {
+                    this.$B.emit('Engine::PublishArticle', article);
+                });
+            }
+        });
+    }
+
     _handleResponse(response) {
         response.forEach(article => {
-            if (article) {
-                this.DAL.checkIfArticleExists(article.url).then(articleExists => {
-                    if (!articleExists) {
-                        this.DAL.insertArticle(article).then((response) => {
-                            this.$B.emit('Engine::PublishArticle', article);
-                        });
-                    }
-                });
+            if (article?.url && article?.title) {
+                this._attemptArticleInsertion(article);
+            } else {
+                console.error(`Couldn't attempt to insert article. Missing URL or Title: \n ${JSON.stringify(article)}`)
             }
         });
     }
@@ -81,6 +87,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.BolognaInDirettaIT);
         this._scheduleScraping(SourcesIndex.BolognaRepubblicaIT);
         this._scheduleScraping(SourcesIndex.NotizieVirgilioITBologna);
+        this._scheduleScraping(SourcesIndex.GazzettaDiBolognaITViewAll);
     }
 }
 

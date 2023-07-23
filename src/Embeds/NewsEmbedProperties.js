@@ -33,6 +33,10 @@ class EmbedProperties {
             'virgilio.it': {
                 color: '#e74b18',
                 name: 'Notizie Virgilio'
+            },
+            'gazzettadibologna.it': {
+                color: '#878787',
+                name: 'Gazzetta di Bologna'
             }
         }
     }
