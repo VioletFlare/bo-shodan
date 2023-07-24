@@ -1,4 +1,5 @@
 const srcsetParse = require('srcset-parse').default;
+const Utils = require('./../Modules/Utils');
 
 class BolognaRepubblicaIT {
 
@@ -16,7 +17,7 @@ class BolognaRepubblicaIT {
         `);
 
         articles.each((i, article) => {
-            let url = $('a', article).attr('href').replace(/\?.+/, '');
+            let url = Utils.cleanUrl($('a', article).attr('href'));
             const title = $('h2', article).text().replace('\n', '').trim();
             const description = $('.entry__summary', article).text().replace('\n', '').trim();
             let img = $('img', article).attr('src');
