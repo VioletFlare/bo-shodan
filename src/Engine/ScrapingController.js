@@ -41,7 +41,7 @@ class ScrapingController {
     }
   
     _handle(self, source) {
-      Scraper.simpleScrap(source).then(
+      Scraper.scrap(source).then(
           (response) => this._runJob(self, source, response)
       );
     }
@@ -88,6 +88,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.BolognaRepubblicaIT);
         this._scheduleScraping(SourcesIndex.NotizieVirgilioITBologna);
         this._scheduleScraping(SourcesIndex.GazzettaDiBolognaITViewAll);
+        this._scheduleScraping(SourcesIndex.MetroNewsITAjaxHTMLBologna);
     }
 }
 

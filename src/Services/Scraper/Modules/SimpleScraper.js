@@ -1,38 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const UserAgent = require('user-agents');
-const iconv = require('iconv-lite');
+const Utils = require('./Utils');
+
 const DAL = require('./../../../DAL/DAL.js');
 
 class SimpleScraper {
-    _getUserAgent(source) {
-        let device = 'mobile';
-        
-        if (source.device) {
-            device = source.device;
-        }
-
-        const userAgent = new UserAgent({
-            deviceCategory: device
-        }).toString();
-
-        return userAgent;
-    }
-
-    _decodeResponse(encodedData, source) {
-        let decodedData;
-
-        if (source.encoding) {
-            decodedData = iconv.decode(encodedData, source.encoding);
-        } else {
-            decodedData = iconv.decode(encodedData, 'utf8');
-        }
-
-        return decodedData;
-    }
-
     _getHome(resolve, source) {
-        const userAgent = this._getUserAgent(source);
+        const userAgent = Utils.getUserAgent(source);
 
         axios
             .get(source.url, {
@@ -41,7 +15,7 @@ class SimpleScraper {
                 responseEncoding: 'binary'
             })
             .then((response) => {
-				const unparsedData = this._decodeResponse(response.data, source);
+				const unparsedData = Utils.decodeResponse(response.data, source);
 
                 const $ = cheerio.load(unparsedData);
                 const data = source.run($);
@@ -55,7 +29,7 @@ class SimpleScraper {
     }
 
     _getArticle(resolve, source, articleData) {
-        const userAgent = this._getUserAgent(source);
+        const userAgent = Utils.getUserAgent(source);
 
         DAL.checkIfArticleExists(articleData.url).then((articleExists) => {
             if (!articleExists) {
@@ -66,7 +40,7 @@ class SimpleScraper {
                         responseEncoding: 'binary'
                     })
                     .then((response) => {
-                        const unparsedData = this._decodeResponse(response.data, source);
+                        const unparsedData = Utils.decodeResponse(response.data, source);
         
                         const $ = cheerio.load(unparsedData);
                         const data = source.run($);

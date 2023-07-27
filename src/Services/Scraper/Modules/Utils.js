@@ -1,3 +1,6 @@
+const UserAgent = require('user-agents');
+const iconv = require('iconv-lite');
+
 class Utils {
 
     cleanUrl(url) {
@@ -5,6 +8,32 @@ class Utils {
         const newUrl = oldUrl.origin + oldUrl.pathname;
 
         return newUrl;
+    }
+
+    getUserAgent(source) {
+        let device = 'mobile';
+        
+        if (source.device) {
+            device = source.device;
+        }
+
+        const userAgent = new UserAgent({
+            deviceCategory: device
+        }).toString();
+
+        return userAgent;
+    }
+
+    decodeResponse(encodedData, source) {
+        let decodedData;
+
+        if (source.encoding) {
+            decodedData = iconv.decode(encodedData, source.encoding);
+        } else {
+            decodedData = iconv.decode(encodedData, 'utf8');
+        }
+
+        return decodedData;
     }
 
 }

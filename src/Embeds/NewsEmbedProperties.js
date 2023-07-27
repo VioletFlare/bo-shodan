@@ -37,6 +37,10 @@ class EmbedProperties {
             'gazzettadibologna.it': {
                 color: '#878787',
                 name: 'Gazzetta di Bologna'
+            },
+            'metronews.it': {
+                color: '#FFFFFF',
+                name: 'Metronews'
             }
         }
     }
