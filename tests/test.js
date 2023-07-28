@@ -1,5 +1,5 @@
 console.log('Running in test mode...');
 
-const Engine = require('../src/Engine/Engine');
+const Scraping = require('./Scraping');
 
-new Engine(this.$B).init();
+Scraping.run();
