@@ -1,6 +1,8 @@
 const proxyquire = require('proxyquire');
-const DALStub = require('./DALStub');
-const Scraper = proxyquire("../src/Services/Scraper/Scraper.js", { 'SimpleScraper': { './../../../DAL/DAL.js': DALStub } } );
+const SimpleScraper = proxyquire('../src/Services/Scraper/Modules/SimpleScraper', { './../../../DAL/DAL.js': {
+	checkIfArticleExists: (url) => new Promise(resolve => resolve(false))
+}})
+const Scraper = proxyquire("../src/Services/Scraper/Scraper.js", { './Modules/SimpleScraper.js': SimpleScraper } );
 const SourcesIndex = require('../src/Services/Scraper/SourcesIndex.js');
 
 class Scraping {
