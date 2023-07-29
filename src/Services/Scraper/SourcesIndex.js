@@ -9,6 +9,7 @@ const BolognaRepubblicaIT = require('./Sources/bologna.repubblica.it.js');
 const NotizieVirgilioITBologna = require('./Sources/notizie.virgilio.it-bologna.js');
 const GazzettaDiBolognaITViewAll = require('./Sources/gazzettadibologna.it.viewall.js');
 const MetroNewsITAjaxHTMLBologna = require('./Sources/metronews.it-ajaxhtml-bologna.js');
+const BolognaNotizieCOM = require('./Sources/bolognanotizie.com.js');
 
 module.exports = {
     MagazineUniboITHome: MagazineUniboITHome,
@@ -22,4 +23,5 @@ module.exports = {
     NotizieVirgilioITBologna: NotizieVirgilioITBologna,
     GazzettaDiBolognaITViewAll: GazzettaDiBolognaITViewAll,
     MetroNewsITAjaxHTMLBologna: MetroNewsITAjaxHTMLBologna,
+    BolognaNotizieCOM: BolognaNotizieCOM,
 }

@@ -89,6 +89,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.NotizieVirgilioITBologna);
         this._scheduleScraping(SourcesIndex.GazzettaDiBolognaITViewAll);
         this._scheduleScraping(SourcesIndex.MetroNewsITAjaxHTMLBologna);
+        this._scheduleScraping(SourcesIndex.BolognaNotizieCOM);
     }
 }
 

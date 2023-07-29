@@ -41,6 +41,10 @@ class EmbedProperties {
             'metronews.it': {
                 color: '#FFFFFF',
                 name: 'Metronews'
+            },
+            'bolognanotizie.com': {
+                color: '#FADA5E',
+                name: 'BOLOGNA NOTIZIE'
             }
         }
     }
