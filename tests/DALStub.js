@@ -1,6 +1,6 @@
 class DALStub {
-	checkIfArticleExists = (url) => {
-		return new Promise(resolve => resolve(false));
+	checkIfArticleExists(url) {
+		return new Promise(resolve => resolve(true));
 	}
 }
 

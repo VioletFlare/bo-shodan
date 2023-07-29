@@ -1,4 +1,4 @@
-const client = require('./Client');
+const Connection = require('./Connection');
 const { Schema, Entity } = require('redis-om');
 
 class NewsArticle extends Entity {};
@@ -13,7 +13,7 @@ const newsArticleSchema = new Schema(NewsArticle, {
     metaPublishedOnDiscord: { type: 'boolean' }
 });
 
-module.exports = client.then(c => {
+module.exports = Connection.start().then(c => {
     const newsArticleRepository = c.fetchRepository(newsArticleSchema);
     newsArticleRepository.createIndex();
     return newsArticleRepository;
