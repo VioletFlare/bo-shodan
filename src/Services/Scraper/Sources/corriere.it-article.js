@@ -17,6 +17,11 @@ class CorriereITArticle {
 			content = $('.content > *:not(.information-group):not(.has-first-letter):not(#ads_halfpage_mobile)').text().trim();
 		} else {
 			title = $('h1.title-art').text().trim();
+
+			if (!title) {
+				title = $('h1.title-art-hp').text().trim();
+			}
+
 			img = $('div.is-hero figure img').attr('src');
 			description = $('.summary-art').text().trim();
 			content = $('.content > *:not(.information-group):not(#ads_halfpage_mobile)').text().trim();
