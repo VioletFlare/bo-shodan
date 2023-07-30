@@ -79,6 +79,7 @@ class ScrapingController {
     init() {
         this._setEvents();
         //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
+
         this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
         this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
@@ -90,6 +91,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.GazzettaDiBolognaITViewAll);
         this._scheduleScraping(SourcesIndex.MetroNewsITAjaxHTMLBologna);
         this._scheduleScraping(SourcesIndex.BolognaNotizieCOM);
+        this._scheduleScraping(SourcesIndex.Bologna24OreIT);
     }
 }
 

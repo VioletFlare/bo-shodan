@@ -45,6 +45,10 @@ class EmbedProperties {
             'bolognanotizie.com': {
                 color: '#FADA5E',
                 name: 'BOLOGNA NOTIZIE'
+            },
+            'bologna24ore.it': {
+                color: '#4ea9ba',
+                name: 'BOLOGNA 24 ORE'
             }
         }
     }
