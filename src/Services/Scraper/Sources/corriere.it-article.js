@@ -6,7 +6,8 @@ class CorriereITArticle {
 	}
 
 	run($) {
-		const isSpecialSection = $('body:not(.type-article):not(#cronache)').length;
+		const ldJson = JSON.parse($('head [type="application/ld+json"]').text());
+		const isSpecialSection = $('body:not(.type-article):not(#cronache)').length && ldJson.articleSection !== 'Cultura';
 
 		let title = '', img = '', description = '', content = '';
 

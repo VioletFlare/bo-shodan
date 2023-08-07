@@ -13,7 +13,18 @@ class Scraping {
 
 	run() {
 		Scraper.scrap(this.source).then(
-			(response) => console.log(JSON.stringify(response))
+			(response) => {
+				response.forEach(data => {
+					if (data.url && data.title) {
+						console.log("OK", data.url)
+					} else {
+						console.error("Missing URL or TITLE", {
+							url: data.url,
+							title: data.title
+						})
+					}
+				})
+			}
 		);
 	}
 
