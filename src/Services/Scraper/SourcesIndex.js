@@ -12,6 +12,7 @@ const MetroNewsITAjaxHTMLBologna = require('./Sources/metronews.it-ajaxhtml-bolo
 const BolognaNotizieCOM = require('./Sources/bolognanotizie.com.js');
 const Bologna24OreIT = require('./Sources/bologna24ore.it.js');
 const ComuneBolognaITAjaxJson = require('./Sources/comune.bologna.it-ajaxjson.js');
+const OpenOnlineBologna = require('./Sources/open.online-bologna.js');
 
 module.exports = {
     MagazineUniboITHome: MagazineUniboITHome,
@@ -27,5 +28,6 @@ module.exports = {
     MetroNewsITAjaxHTMLBologna: MetroNewsITAjaxHTMLBologna,
     BolognaNotizieCOM: BolognaNotizieCOM,
     Bologna24OreIT: Bologna24OreIT,
-    ComuneBolognaITAjaxJson: ComuneBolognaITAjaxJson
+    ComuneBolognaITAjaxJson: ComuneBolognaITAjaxJson,
+    OpenOnlineBologna: OpenOnlineBologna
 }

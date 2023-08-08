@@ -53,6 +53,10 @@ class EmbedProperties {
             'comune.bologna.it': {
                 color: '#b01736',
                 name: 'Comune di Bologna'
+            },
+            'rainews.it': {
+                color: '#000099',
+                name: 'RaiNews'
             }
         }
     }
