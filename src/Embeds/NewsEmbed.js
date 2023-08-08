@@ -16,7 +16,11 @@ class NewsEmbed {
         }
 
         if (model.description) {
-            embed.setDescription(model.description)
+            try {
+                embed.setDescription(model.description)
+            } catch (e) {
+                console.error('Setting Description Error: ', e);
+            }
         }
         
         if (model.img) {

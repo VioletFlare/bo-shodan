@@ -1,5 +1,6 @@
 const AjaxHTMLScraper = require('./Modules/AjaxHTMLScraper.js');
 const SimpleScraper = require('./Modules/SimpleScraper.js');
+const AjaxJSONScraper = require('./Modules/AjaxJSONScraper.js');
 
 class Scraper {
     _routeScraper(source) {
@@ -7,6 +8,8 @@ class Scraper {
             return SimpleScraper.scrap(source);
         } else if (source.scraper == 'AjaxHTML') {
             return AjaxHTMLScraper.scrap(source);
+        } else if (source.scraper = 'AjaxJSON') {
+            return AjaxJSONScraper.scrap(source);
         }
     }
 

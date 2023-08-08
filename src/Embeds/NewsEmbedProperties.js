@@ -49,6 +49,10 @@ class EmbedProperties {
             'bologna24ore.it': {
                 color: '#4ea9ba',
                 name: 'BOLOGNA 24 ORE'
+            },
+            'comune.bologna.it': {
+                color: '#b01736',
+                name: 'Comune di Bologna'
             }
         }
     }

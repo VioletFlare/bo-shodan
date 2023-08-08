@@ -92,6 +92,7 @@ class ScrapingController {
         this._scheduleScraping(SourcesIndex.MetroNewsITAjaxHTMLBologna);
         this._scheduleScraping(SourcesIndex.BolognaNotizieCOM);
         this._scheduleScraping(SourcesIndex.Bologna24OreIT);
+        this._scheduleScraping(SourcesIndex.ComuneBolognaITAjaxJson);
     }
 }
 
