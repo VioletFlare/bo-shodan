@@ -57,6 +57,10 @@ class EmbedProperties {
             'rainews.it': {
                 color: '#000099',
                 name: 'RaiNews'
+            },
+            'today.it': {
+                color: '#FFFFFF',
+                name: 'Today'
             }
         }
     }
