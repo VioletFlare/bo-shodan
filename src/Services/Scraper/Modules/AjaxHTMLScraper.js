@@ -25,7 +25,7 @@ class AjaxHTMLScraper {
                 resolve(data);
             })
             .catch((error) => {
-                console.error(error);
+                Utils.logError(error);
                 resolve(undefined);
             });
     }

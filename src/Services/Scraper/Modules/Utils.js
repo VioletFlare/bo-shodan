@@ -36,6 +36,16 @@ class Utils {
         return decodedData;
     }
 
+    logError(error) {
+        if (error.response.status === 403) {
+            console.error('Error 403: ', source.url);
+        } else if (error.response.status === 429) {
+            console.error('Error 429: ', source.url);
+        } else {
+            console.error(error);
+        }
+    }
+
 }
 
 module.exports = new Utils();

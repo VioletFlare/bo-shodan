@@ -5,6 +5,8 @@ const Utils = require('./Utils');
 const DAL = require('./../../../DAL/DAL.js');
 
 class SimpleScraper {
+
+
     _getHome(resolve, source) {
         const userAgent = Utils.getUserAgent(source);
 
@@ -23,7 +25,7 @@ class SimpleScraper {
                 resolve(data);
             })
             .catch((error) => {
-                console.error(error);
+                Utils.logError(error);
                 resolve(undefined);
             });
     }
@@ -50,7 +52,7 @@ class SimpleScraper {
                         resolve(newData);
                     })
                     .catch((error) => {
-                        console.error(error);
+                        Utils.logError(error);
                         resolve(undefined)
                     });
             } else {
