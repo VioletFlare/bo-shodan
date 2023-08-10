@@ -7,20 +7,25 @@ class PuppeteerScraper {
 
     _getHome(resolve, source) {
         puppeteer.launch({ headless: "new" }).then(async browser => {
-            const page = await browser.newPage()
-            await page.setViewport({ width: 800, height: 600 })
-          
-            await page.goto(source.url)
-            await page.waitForTimeout(5000)
+            try {
+                const page = await browser.newPage()
+                await page.setViewport({ width: 800, height: 600 })
+              
+                await page.goto(source.url)
+                await page.waitForTimeout(5000)
+    
+                const unparsedData = await page.content()
+                
+                const $ = cheerio.load(unparsedData);
+                const data = source.run($);
 
-            const unparsedData = await page.content()
-            
-            const $ = cheerio.load(unparsedData);
-            const data = source.run($);
+                browser.close();
 
-            await browser.close()
-
-            resolve(data);
+                resolve(data);
+            } catch (error) {
+                browser.close();
+                console.error(error);
+            }
           })
     }
 
