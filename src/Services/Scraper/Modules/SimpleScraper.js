@@ -54,6 +54,7 @@ class SimpleScraper {
                         resolve(undefined)
                     });
             } else {
+                articleData.metaExistsInDb = true;
                 resolve(articleData);
             }
         })

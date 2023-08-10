@@ -22,11 +22,13 @@ class ScrapingController {
 
     _handleResponse(response) {
         response.forEach(article => {
-            if (article?.url && article?.title) {
-                this._attemptArticleInsertion(article);
-            } else {
-                console.error(`Couldn't attempt to insert article. Missing URL or Title: \n ${JSON.stringify(article)}`)
-            }
+            if (!article.metaExistsInDb) {
+                if (article?.url && article?.title) {
+                    this._attemptArticleInsertion(article);
+                } else {
+                    console.error(`Couldn't attempt to insert article. Missing URL or Title: \n ${JSON.stringify(article)}`)
+                }
+            }   
         });
     }
   
@@ -79,7 +81,7 @@ class ScrapingController {
     init() {
         this._setEvents();
         //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
-
+        
         this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
         this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
