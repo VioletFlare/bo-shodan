@@ -23,7 +23,7 @@ class AjaxJSONScraper {
                 resolve(data);
             })
             .catch((error) => {
-                Utils.logError(error);
+                Utils.logError(error, source);
                 resolve(undefined);
             });
     }

@@ -25,7 +25,7 @@ class SimpleScraper {
                 resolve(data);
             })
             .catch((error) => {
-                Utils.logError(error);
+                Utils.logError(error, source);
                 resolve(undefined);
             });
     }
@@ -52,7 +52,7 @@ class SimpleScraper {
                         resolve(newData);
                     })
                     .catch((error) => {
-                        Utils.logError(error);
+                        Utils.logError(error, source);
                         resolve(undefined)
                     });
             } else {
