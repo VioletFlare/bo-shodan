@@ -7,7 +7,11 @@ class CorriereITArticle {
 
 	run($) {
 		const ldJson = JSON.parse($('head [type="application/ld+json"]').text());
-		const isSpecialSection = $('body:not(.type-article):not(#cronache)').length && ldJson.articleSection !== 'Cultura';
+		const isSpecialSection = $('body:not(.type-article):not(#cronache)').length 
+									&& ldJson.articleSection !== 'Cultura' 
+									&& ldJson.articleSection !== 'Politica' 
+									&& ldJson.articleSection !== 'Meteo'
+									&& ldJson.articleSection !== 'Sport';
 
 		let title = '', img = '', description = '', content = '';
 
