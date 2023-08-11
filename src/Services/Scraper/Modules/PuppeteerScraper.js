@@ -1,38 +1,32 @@
-const puppeteer = require('puppeteer-extra')
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
-const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
-const cheerio = require('cheerio');
+const Connection = require('./../../../Redis/Connection');
 
 class PuppeteerScraper {
 
     _getHome(resolve, source) {
-        puppeteer.launch({ headless: "new" }).then(async browser => {
-            try {
-                const page = await browser.newPage()
-                await page.setViewport({ width: 800, height: 600 })
-              
-                await page.goto(source.url)
-                await page.waitForTimeout(5000)
-    
-                const unparsedData = await page.content()
-                
-                const $ = cheerio.load(unparsedData);
-                const data = source.run($);
+        const client = Connection.start();
 
-                browser.close();
+        client.then(c => {
+            c.subscribe('PuppeteerScraper', (message) => {
+                resolve(message);
+            });
+        })
 
-                resolve(data);
-            } catch (error) {
-                browser.close();
-                console.error(error);
-            }
-          })
+        const proc = spawn('node', [
+            path.resolve(__dirname, 'PuppeteerScraperWorker.js'),
+        ], { shell: false });
+            
+        proc.stderr.on('data', (data) => {
+            console.error(`NodeERR: ${data}`);
+        });
+
+        proc.on('exit', () => {
+            proc.kill();
+            Connection.stop();
+            resolve(undefined);
+        });
     }
 
     scrap(source) {
-        puppeteer.use(StealthPlugin())
-        puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
-
         return new Promise((resolve) => {
             this._getHome(resolve, source);
         })
