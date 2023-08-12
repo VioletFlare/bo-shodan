@@ -1,13 +1,20 @@
 const Connection = require('./../../../Redis/Connection');
 
+const { spawn } = require('child_process');
+const path = require('path');
+
 class PuppeteerScraper {
 
     _getHome(resolve, source) {
-        const client = Connection.start();
+        const client = new Connection().start();
 
         client.then(c => {
-            c.subscribe('PuppeteerScraper', (message) => {
-                resolve(message);
+            const sub = c.duplicate();
+            sub.connect().then(() => { 
+                sub.subscribe('PuppeteerScraper::OUT', (message) => {
+                    resolve(message);
+                    sub.disconnect();
+                });
             });
         })
 
@@ -15,8 +22,18 @@ class PuppeteerScraper {
             path.resolve(__dirname, 'PuppeteerScraperWorker.js'),
         ], { shell: false });
             
+        proc.stdout.on('data', data => {
+            const decodedData = data.toString('utf8');
+
+            if (decodedData === 'PuppeteerScraperWorker::Subscribed') {
+                client.then(c => {
+                   c.publish('PuppeteerScraper::IN', JSON.stringify(source));
+                })
+            }
+        })
+
         proc.stderr.on('data', (data) => {
-            console.error(`NodeERR: ${data}`);
+            console.error(`PuppetterScraperWorker: ${data}`);
         });
 
         proc.on('exit', () => {

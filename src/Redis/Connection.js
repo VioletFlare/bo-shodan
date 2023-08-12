@@ -4,32 +4,37 @@ config = require('../../config.js');
 class Connection {
     start() {
         if (Object.keys(config).length > 0) {
-            const isDev = process.argv.includes("--dev");
-            
+            const isDev = process.argv.includes('--dev');
+
             if (isDev) {
-                this.client = createClient(config.REDIS_URL_DEV);
+                this.client = createClient({ url: config.REDIS_URL_DEV });
             } else {
-                this.client = createClient(config.REDIS_URL_PROD);
+                this.client = createClient({ url: config.REDIS_URL_PROD });
             }
 
-            this.client.on('error', err => console.error('Redis Client Error', err));
+            this.client.on('error', (err) =>
+                console.error('Redis Client Error', err)
+            );
 
-            this.client = client.connect();
+            this.promisedClient = new Promise((resolve) => {
+                this.client.connect().then(() => {
+                    resolve(this.client);
+                });
+            });
         } else {
-            this.client = new Promise((reject) => "Empty Config")
+            this.promisedClient = new Promise((reject) => 'Empty Config');
         }
 
-        return this.client;
+        return this.promisedClient;
     }
 
     stop() {
-        if (this.client) {
-            this.client.then(c => {
+        if (this.promisedClient) {
+            this.promisedClient.then((c) => {
                 if (c) c.disconnect();
-            })
+            });
         }
     }
-
 }
 
-module.exports = new Connection();
+module.exports = Connection;

@@ -8,7 +8,7 @@ const SourcesIndex = require('../src/Services/Scraper/SourcesIndex.js');
 class Scraping {
 
 	constructor() {
-		this.source = SourcesIndex.ComuneBolognaITAjaxJson
+		this.source = SourcesIndex.RainewsITHome
 	}
 
 	run() {
