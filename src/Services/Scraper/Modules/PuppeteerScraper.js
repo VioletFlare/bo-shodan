@@ -11,14 +11,17 @@ class PuppeteerScraper {
 
         sub.subscribe('PuppeteerScraper::OUT');
 
-        sub.on("message", (message) => {
-            resolve(message);
+        sub.on("message", (channel, message) => {
+            resolve(JSON.parse(message));
             sub.disconnect();
         });
 
+        const isDev = process.argv.find((arg) => arg === '--dev');
+
         const proc = spawn('node', [
             path.resolve(__dirname, 'PuppeteerScraperWorker.js'),
-        ], { shell: true });
+            isDev
+        ], { shell: false });
             
         proc.stdout.on('data', data => {
             const decodedData = data.toString('utf8');
@@ -34,7 +37,7 @@ class PuppeteerScraper {
 
         proc.on('exit', () => {
             proc.kill();
-            Connection.stop();
+            sub.disconnect();
             resolve(undefined);
         });
     }

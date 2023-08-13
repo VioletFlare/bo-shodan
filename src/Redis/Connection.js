@@ -18,12 +18,6 @@ class Connection {
 
         return this.client;
     }
-
-    stop() {
-        if (this.client) {
-            this.client.disconnect();
-        }
-    }
 }
 
 module.exports = Connection;

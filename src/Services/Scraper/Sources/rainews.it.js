@@ -1,8 +1,11 @@
+const { pathToFileURL } = require('url');
+
 class RainewsITHome {
 
     constructor() {
         this.scraper = "Puppeteer";
         this.url = 'https://www.rainews.it';
+        this.path = pathToFileURL(__filename).href;
     }
 
     _shortenTitle(title) {
