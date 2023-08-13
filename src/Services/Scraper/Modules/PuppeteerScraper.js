@@ -14,6 +14,7 @@ class PuppeteerScraper {
         sub.on("message", (channel, message) => {
             resolve(JSON.parse(message));
             sub.disconnect();
+            proc.kill();
         });
 
         const isDev = process.argv.find((arg) => arg === '--dev');
@@ -36,7 +37,7 @@ class PuppeteerScraper {
         });
 
         proc.on('exit', () => {
-            proc.kill('SIGINT');
+            proc.kill();
             sub.disconnect();
             resolve(undefined);
         });
