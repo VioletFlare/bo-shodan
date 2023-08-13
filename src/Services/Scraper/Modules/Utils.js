@@ -37,10 +37,12 @@ class Utils {
     }
 
     logError(error, source) {
-        if (error.response.status === 403) {
-            console.error('Error 403: ', source.url);
-        } else if (error.response.status === 429) {
-            console.error('Error 429: ', source.url);
+        if (error?.response?.status) {
+            if (error.response.status === 403) {
+                console.error('Error 403: ', source.url);
+            } else if (error.response.status === 429) {
+                console.error('Error 429: ', source.url);
+            }
         } else {
             console.error(error);
         }
