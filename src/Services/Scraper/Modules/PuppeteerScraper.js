@@ -36,7 +36,7 @@ class PuppeteerScraper {
         });
 
         proc.on('exit', () => {
-            proc.kill();
+            proc.kill('SIGINT');
             sub.disconnect();
             resolve(undefined);
         });
