@@ -32,9 +32,7 @@ class ScrapingController {
         });
     }
   
-    _runJob(self, source, response) {
-      self.stop();
-
+    _runJob(source, response) {
       if (response) {
         this._handleResponse(response);
       }
@@ -43,8 +41,10 @@ class ScrapingController {
     }
   
     _handle(self, source) {
+      self.stop();
+
       Scraper.scrap(source).then(
-          (response) => this._runJob(self, source, response)
+          (response) => this._runJob(source, response)
       );
     }
 
@@ -53,8 +53,8 @@ class ScrapingController {
     }
   
     _scheduleScraping(source) {
-        const second = this._getRandomArbitraryInteger(1, 60);
-        const minute = this._getRandomArbitraryInteger(1, 60);
+        const second = this._getRandomArbitraryInteger(5, 60);
+        const minute = this._getRandomArbitraryInteger(5, 60);
         const pattern = `*/${second} */${minute} * * * *`;
     
         const cronJob = new CronJob(
@@ -81,6 +81,7 @@ class ScrapingController {
     init() {
         this._setEvents();
         //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
+        
         this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
         this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);

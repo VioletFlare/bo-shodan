@@ -45,7 +45,7 @@ class PuppeteerScraper {
     scrap(source) {
         return new Promise((resolve) => {
             this._getHome(resolve, source);
-        })
+        });
     }
 
 }
