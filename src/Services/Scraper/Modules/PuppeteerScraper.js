@@ -6,29 +6,25 @@ const path = require('path');
 class PuppeteerScraper {
 
     _getHome(resolve, source) {
-        const client = new Connection().start();
+        const sub = new Connection().start();
+        const pub = new Connection().start();
 
-        client.then(c => {
-            const sub = c.duplicate();
-            sub.connect().then(() => { 
-                sub.subscribe('PuppeteerScraper::OUT', (message) => {
-                    resolve(message);
-                    sub.disconnect();
-                });
-            });
-        })
+        sub.subscribe('PuppeteerScraper::OUT');
+
+        sub.on("message", (message) => {
+            resolve(message);
+            sub.disconnect();
+        });
 
         const proc = spawn('node', [
             path.resolve(__dirname, 'PuppeteerScraperWorker.js'),
-        ], { shell: false });
+        ], { shell: true });
             
         proc.stdout.on('data', data => {
             const decodedData = data.toString('utf8');
 
             if (decodedData === 'PuppeteerScraperWorker::Subscribed') {
-                client.then(c => {
-                   c.publish('PuppeteerScraper::IN', JSON.stringify(source));
-                })
+                pub.publish('PuppeteerScraper::IN', JSON.stringify(source));
             }
         })
 

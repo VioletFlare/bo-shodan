@@ -1,4 +1,4 @@
-const { createClient } = require('redis');
+const Redis = require("ioredis");
 config = require('../../config.js');
 
 class Connection {
@@ -7,32 +7,21 @@ class Connection {
             const isDev = process.argv.includes('--dev');
 
             if (isDev) {
-                this.client = createClient({ url: config.REDIS_URL_DEV });
+                this.client = new Redis(config.REDIS_URL_DEV);
             } else {
-                this.client = createClient({ url: config.REDIS_URL_PROD });
+                this.client = new Redis(config.REDIS_URL_PROD);
             }
 
-            this.client.on('error', (err) =>
-                console.error('Redis Client Error', err)
-            );
-
-            this.promisedClient = new Promise((resolve) => {
-                this.client.connect().then(() => {
-                    resolve(this.client);
-                });
-            });
         } else {
-            this.promisedClient = new Promise((reject) => 'Empty Config');
+            this.client = new Promise((resolve, reject) => resolve('Empty Config'));
         }
 
-        return this.promisedClient;
+        return this.client;
     }
 
     stop() {
-        if (this.promisedClient) {
-            this.promisedClient.then((c) => {
-                if (c) c.disconnect();
-            });
+        if (this.client) {
+            this.client.disconnect();
         }
     }
 }
