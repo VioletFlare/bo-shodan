@@ -27,13 +27,14 @@ class PuppeteerScraperWorker {
                 const $ = cheerio.load(unparsedData);
                 const data = source.run($);
 
-                browser.close();
-
                 pub.publish('PuppeteerScraper::OUT', JSON.stringify(data));
-                pub.disconnect();
             } catch (error) {
-                browser.close();
+                pub.publish('PuppeteerScraper::OUT', undefined);
+
                 console.error(error);
+            } finally {
+                browser.close();
+                pub.disconnect();
             }
         });
     }

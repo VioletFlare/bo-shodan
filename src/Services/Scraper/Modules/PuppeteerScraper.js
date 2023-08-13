@@ -12,9 +12,17 @@ class PuppeteerScraper {
         sub.subscribe('PuppeteerScraper::OUT');
 
         sub.on("message", (channel, message) => {
-            resolve(JSON.parse(message));
+            if (message) {
+                resolve(JSON.parse(message));
+            } else {
+                resolve(undefined);
+            }
+            
             sub.disconnect();
-            proc.kill();
+
+            if (!proc.killed) {
+                proc.kill('SIGKILL');
+            }
         });
 
         const isDev = process.argv.find((arg) => arg === '--dev');
@@ -33,11 +41,10 @@ class PuppeteerScraper {
         })
 
         proc.stderr.on('data', (data) => {
-            console.error(`PuppetterScraperWorker: ${data}`);
+            console.error(`PuppeteerScraperWorker: ${data}`);
         });
 
         proc.on('exit', () => {
-            proc.kill();
             sub.disconnect();
             resolve(undefined);
         });

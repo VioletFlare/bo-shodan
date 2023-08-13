@@ -14,16 +14,20 @@ class Scraping {
 	run() {
 		Scraper.scrap(this.source).then(
 			(response) => {
-				response.forEach(data => {
-					if (data.url && data.title) {
-						console.log("OK", data.url)
-					} else {
-						console.error("Missing URL or TITLE", {
-							url: data.url,
-							title: data.title
-						})
-					}
-				})
+				if (response) {
+					response.forEach(data => {
+						if (data.url && data.title) {
+							console.log("OK", data.url)
+						} else {
+							console.error("Missing URL or TITLE", {
+								url: data.url,
+								title: data.title
+							})
+						}
+					})
+				} else {
+					console.error('No response from scraper')
+				}
 			}
 		);
 	}
