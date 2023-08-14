@@ -14,7 +14,7 @@ class PuppeteerScraperWorker {
     _runPuppeteer(source) {
         const pub = new Connection().start();
 
-        puppeteer.launch({ headless: 'new', args: ['--no-zygote', '--single-process', '--no-sandbox'] }).then(async (browser) => {
+        puppeteer.launch({ headless: 'new' }).then(async (browser) => {
             try {
                 const page = await browser.newPage();
                 await page.setViewport({ width: 800, height: 600 });
@@ -27,14 +27,16 @@ class PuppeteerScraperWorker {
                 const $ = cheerio.load(unparsedData);
                 const data = source.run($);
 
+                await browser.close();
+
                 pub.publish('PuppeteerScraper::OUT', JSON.stringify(data));
+                pub.disconnect();
             } catch (error) {
+                await browser.close();
                 pub.publish('PuppeteerScraper::OUT', undefined);
 
-                console.error(error);
-            } finally {
-                browser.close();
                 pub.disconnect();
+                console.error(error);
             }
         });
     }
