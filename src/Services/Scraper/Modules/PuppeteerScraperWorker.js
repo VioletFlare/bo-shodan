@@ -14,7 +14,7 @@ class PuppeteerScraperWorker {
     _runPuppeteer(source) {
         const pub = new Connection().start();
 
-        puppeteer.launch({ headless: 'new' }).then(async (browser) => {
+        puppeteer.launch({ headless: 'new', args: ['--no-zygote', '--single-process'] }).then(async (browser) => {
             try {
                 const page = await browser.newPage();
                 await page.setViewport({ width: 800, height: 600 });
