@@ -4,6 +4,16 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/bo-shodan.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "args": ["--dev"]
+        },
 		{
             "type": "pwa-node",
             "request": "launch",
@@ -11,18 +21,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\tests\\test.js",
+            "program": "${workspaceFolder}/tests/test.js",
             "args": ["--dev"]
         },
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\bo-shodan.js",
-            "args": ["--dev"]
-        }
     ]
 }
