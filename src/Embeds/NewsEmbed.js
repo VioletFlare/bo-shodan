@@ -7,10 +7,18 @@ class NewsEmbed {
         const embed = new EmbedBuilder();
 
         if (model.title && model.url) {
+            let title;
+
+            if (model.title.length > 256) {
+                title = model.title.substring(0, 253) + "...";
+            } else {
+                title = model.title;
+            }
+
             const property = NewsEmbedProperties.getProperty(model.url);
 
             embed.setAuthor({ name: property.name })
-                 .setTitle(model.title)
+                 .setTitle(title)
                  .setURL(model.url)
                  .setColor(property.color)
         }
