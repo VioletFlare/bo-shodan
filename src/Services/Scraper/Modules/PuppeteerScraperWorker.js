@@ -3,7 +3,6 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 const cheerio = require('cheerio');
 const Connection = require('./../../../Redis/Connection');
-const { source } = require('../../../../tests/Scraping');
 
 class PuppeteerScraperWorker {
     constructor() {
