@@ -25,3 +25,7 @@ docker run -i --cap-add=SYS_ADMIN --env ENV_FLAG=--dev boshodan:latest
 This project uses docker ms-azuretools/vscode-docker extension for local development.
 
 https://open-vsx.org/extension/ms-azuretools/vscode-docker
+
+If using an insecure registry this guide must be followed:
+
+https://stackoverflow.com/questions/49674004/docker-repository-server-gave-http-response-to-https-client
