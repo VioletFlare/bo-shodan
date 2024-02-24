@@ -32,7 +32,11 @@ class NewsEmbed {
         }
         
         if (model.img) {
-            embed.setImage(model.img)
+            try {
+                embed.setImage(model.img)
+            } catch (e) {
+                console.error('Setting Image Error: ', e);
+            }
         }
         
         const embedContainer = { 
