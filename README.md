@@ -1,7 +1,27 @@
-# Puppeteer inside a container
-
-requires some deps:
+# Build
 
 ```
-sudo apt-get install libpangocairo-1.0-0 libx11-xcb1 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libgconf-2-4 libasound2 libatk1.0-0 libgtk-3-0 libgbm-dev
+docker build --pull --rm -f "Dockerfile" -t boshodan:latest "."
 ```
+
+# Run
+
+Due to puppeteer madness, running with SYS_ADMIN level is mandatory.
+
+Prod:
+
+```
+docker run -i --cap-add=SYS_ADMIN boshodan:latest 
+```
+
+Dev:
+
+```
+docker run -i --cap-add=SYS_ADMIN --env ENV_FLAG=--dev boshodan:latest 
+```
+
+# Extensions (optional)
+
+This project uses docker ms-azuretools/vscode-docker extension for local development.
+
+https://open-vsx.org/extension/ms-azuretools/vscode-docker
