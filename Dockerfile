@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 ENV ENV_FLAG=--prod
+ENV TZ=Europe/Rome
 
 ARG NODEJS_VERSION=18.x
 
@@ -24,6 +25,9 @@ RUN apt-get install -y wget \
       --no-install-recommends \
     && service dbus start \
     && rm -rf /var/lib/apt/lists/*
+	
+RUN apt-get update && apt-get install -y tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN groupadd -r pptruser && useradd -rm -g pptruser -G audio,video pptruser
 
