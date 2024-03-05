@@ -22,7 +22,7 @@ class AnsaITEmiliaRomagna {
             const title = $('.title a', $article).text().replace('\n', '').trim();
             const description = $('.summary', $article).text().replace('\n', '').trim();
             const srcset = $('img', $article).attr('srcset');
-            const kicker = $('.kicker', $article).text().trim();;
+            const kicker = $('.kicker', $article).text().trim();
             const tags = [kicker];
 
             let img = '';
