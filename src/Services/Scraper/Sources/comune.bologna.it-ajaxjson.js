@@ -270,6 +270,7 @@ class ComuneBolognaITAjaxJson {
         $.page.entities.forEach(entity => {
             const $description = cheerio.load(entity.description);
             let description = $description.text().trim().replace('\n', '');
+            const tags = [];
 
             if (description.length > 1024) {
                 description = description.substring(0, 1024) + '...';
@@ -280,7 +281,7 @@ class ComuneBolognaITAjaxJson {
             const img = this.contentUrl + entity.attributes.sys_uri_immagine_alta_definiz;
 
             allArticles.push({
-                url, img, title, description
+              url, img, title, description, tags
             })
         });
 

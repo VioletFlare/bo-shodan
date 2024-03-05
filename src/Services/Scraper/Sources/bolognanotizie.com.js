@@ -13,6 +13,7 @@ class BolognaNotizieCOM {
         $articles.each((i, article) => {
             const title = $('h2', article).text().replace('\n', '').trim();
             let url = $('h2 a', article).attr('href').replace(/\?.+/, '');
+            const tags = [];
 
             url = this.resourceUrl + url;
 
@@ -24,7 +25,7 @@ class BolognaNotizieCOM {
             }
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

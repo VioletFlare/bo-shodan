@@ -12,7 +12,7 @@ class IlRestoDelCarlinoITBologna {
 
         articles.each((i, article) => {
             const url = $('h3 a', article).attr('href').replace(/\?.+/, '');
-
+            const tags = [];
             const srcset = $('img', article).attr('srcset');
 
             let img = '';
@@ -29,7 +29,7 @@ class IlRestoDelCarlinoITBologna {
             const description = $('div:nth-child(1) > div:nth-child(2) p', article).text();
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

@@ -10,19 +10,20 @@ class AnsaITEmiliaRomagna {
     _getAllArticles($) {
         const allArticles = [];
   
-        const all = $(".article-teaser");
+        const $sectionIntro = $('.article-teaser', '.section-intro-wrap');
+        const $lastHourEmiliaRomagna = $('.article-teaser', '#ultimaora_orizzontale');
+        const $subsection = $('.article-teaser', '.section-subsection-wrap');
+        const $video = $('.article-teaser', '.home-video');
 
-        const articles = all.filter(`
-            :not(.section-articles-stripe-video .article-teaser),
-            :not(#ultima-ora .article-teaser), 
-            :not(.section-promo-articles .article-teaser)
-        `);
+        let articles = $sectionIntro.add($lastHourEmiliaRomagna).add($subsection).add($video);
 
-        articles.each((i, article) => {
-            const url = this.resourceUrl + $('.title a', article).attr('href').replace(/\?.+/, '');
-            const title = $('.title a', article).text().replace('\n', '').trim();
-            const description = $('.summary', article).text().replace('\n', '').trim();
-            const srcset = $('img', article).attr('srcset');
+        articles.each((i, $article) => {
+            const url = this.resourceUrl + $('.title a', $article).attr('href').replace(/\?.+/, '');
+            const title = $('.title a', $article).text().replace('\n', '').trim();
+            const description = $('.summary', $article).text().replace('\n', '').trim();
+            const srcset = $('img', $article).attr('srcset');
+            const kicker = $('.kicker', $article).text().trim();;
+            const tags = [kicker];
 
             let img = '';
 
@@ -36,7 +37,7 @@ class AnsaITEmiliaRomagna {
 
     
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

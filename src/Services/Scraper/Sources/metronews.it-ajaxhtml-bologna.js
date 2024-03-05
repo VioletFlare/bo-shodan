@@ -145,9 +145,10 @@ class MetroNewsITAjaxHTMLBologna {
             let img = $('img', article).attr('src');
             const title = $('.catTitleNotice', article).text().replace('\n', '');
             const description = $('.contentCatTextNotice', article).text().replace('\n', '');
+            const tags = [];
 
 			allPosts.push({
-				url, img, title, description
+				url, img, title, description, tags
 			});
         });
 

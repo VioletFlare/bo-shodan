@@ -14,9 +14,10 @@ class Bologna24OreIT {
             let url = $('h3 a', article).attr('href').replace(/\?.+/, '');
             const description = '';
             let img = $('img', article).attr('src');
+            const tags = [];
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

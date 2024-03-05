@@ -15,6 +15,8 @@ class CorriereITArticle {
 
 		let title = '', img = '', description = '', content = '';
 
+		const tags = [];
+
 		if (isSpecialSection) {
 			title = $('h1.title').text().trim();
 			img = $('div.is-hero figure img').attr('src');
@@ -39,7 +41,7 @@ class CorriereITArticle {
 		}
 		
 		return {
-			url: this.url, img, title, description, content
+			url: this.url, img, title, description, content, tags
 		};
 	}
 

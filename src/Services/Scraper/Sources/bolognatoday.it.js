@@ -13,6 +13,7 @@ class BolognaTodayITHome {
         articles.each((i, article) => {
             let href = $('.o-link-text', article).attr('href').replace(/\?.+/, '');
             let url = '';
+            const tags = [];
 
             if (href.indexOf('//') === 0) {
                 url = 'https:' + href;
@@ -45,7 +46,7 @@ class BolognaTodayITHome {
             const description = $('.c-story__summary', article).text().replace('\n', '').trim();
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

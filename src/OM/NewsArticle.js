@@ -9,6 +9,7 @@ const newsArticleSchema = new Schema(NewsArticle, {
     title: { type: 'text' },
     description: { type: 'text' },
     content: { type: 'text' },
+    tags: { type: 'string[]' },
     metaScrapedAtTimestamp: { type: 'date' },
     metaPublishedOnDiscord: { type: 'boolean' }
 });

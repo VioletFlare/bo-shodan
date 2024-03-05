@@ -15,6 +15,7 @@ class AnsaITEmiliaRomagna {
 
         articles.each((i, article) => {
             let title = $('h2', article).text().replace('\n', '').trim();
+            const tags = [];
 
             if (!title) {
                 title = $('h3', article).text().replace('\n', '').trim();
@@ -25,7 +26,7 @@ class AnsaITEmiliaRomagna {
             const img = $('img', article).attr('src');
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

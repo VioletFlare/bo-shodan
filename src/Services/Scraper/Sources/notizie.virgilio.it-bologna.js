@@ -10,6 +10,7 @@ class NotizieVirgilioITBologna {
         $articles.each((i, article) => {
             const url = $('a:first-child', article).attr('href').replace(/\?.+/, '');
             let img = $('img', article).attr('src');
+            const tags = [];
 
             if (img.includes('ph_lazyload.jpg')) {
                 img = $('img', article).attr('data-original');
@@ -19,7 +20,7 @@ class NotizieVirgilioITBologna {
             const description = $('> p', article).text();
 
 			allSearchResults.push({
-				url, img, title, description
+				url, img, title, description, tags
 			});
         });
 

@@ -10,6 +10,7 @@ class GazzettaDiBolognaITViewAll {
 
         $articles.each((i, article) => {
             const url = $('h2 a', article).attr('href').replace(/\?.+/, '');
+            const tags = [];
 
             const img = $('img', article).attr('src');
 
@@ -17,7 +18,7 @@ class GazzettaDiBolognaITViewAll {
             const description = $('.entry-content p', article).text().replace('\n', '');
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 
@@ -25,6 +26,7 @@ class GazzettaDiBolognaITViewAll {
 
         $asideArticles.each((i, article) => {
             const url = $('h3 a', article).attr('href').replace(/\?.+/, '');
+            const tags = [];
 
             const img = $('img', article).attr('src');
 
@@ -36,7 +38,7 @@ class GazzettaDiBolognaITViewAll {
             }
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 

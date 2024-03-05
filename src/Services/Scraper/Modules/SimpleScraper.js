@@ -6,7 +6,6 @@ const DAL = require('./../../../DAL/DAL.js');
 
 class SimpleScraper {
 
-
     _getHome(resolve, source) {
         const userAgent = Utils.getUserAgent(source);
 

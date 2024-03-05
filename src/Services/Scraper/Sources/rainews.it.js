@@ -26,11 +26,12 @@ class RainewsITHome {
             const img = this.url + $('img', article).data('src');
             let title = $('h3 a:first-child', article).text().trim().replace('\n', '');
             const description = $('.launch-item__text', article).text().trim().replace('\n', '');
-      
+            const tags = [];
+
             title = this._shortenTitle(title);
 
             allArticles.push({
-              url, img, title, description
+              url, img, title, description, tags
             })
           });
 
@@ -45,11 +46,12 @@ class RainewsITHome {
             const img = $('img', article).attr('src');
             let title = $('h2', article).text().trim().replace('\n', '');
             const description = $('.occhiello', article).text().trim().replace('\n', '');
+            const tags = [];
       
             title = this._shortenTitle(title);
 
             otherMainPosts.push({
-              url, img, title, description
+              url, img, title, description, tags
             })
           });
 

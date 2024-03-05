@@ -10,9 +10,10 @@ class MagazineUniboITHome {
     const img = $(".row.main-posts .w7 img").attr('src');
     const title = $(".row.main-posts .w7 h1").text();
     const description = $(".row.main-posts .w7 .occhiello").text();
+    const tags = [];
 
     return {
-        url, img, title, description
+      url, img, title, description, tags
     }
   }
 
@@ -24,9 +25,10 @@ class MagazineUniboITHome {
       const img = $('img', el).attr('src');
       const title = $('h2', el).text();
       const description = $('.occhiello', el).text();
+      const tags = [];
 
       otherMainPosts.push({
-        url, img, title, description
+        url, img, title, description, tags
       })
     });
 
