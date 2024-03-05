@@ -21,6 +21,7 @@ class BolognaRepubblicaIT {
             const title = $('h2', article).text().replace('\n', '').trim();
             const description = $('.entry__summary', article).text().replace('\n', '').trim();
             let img = $('img', article).attr('src');
+            const tags = [];
 
             if (!img) {
                 img = $('img', article).attr('data-src');
@@ -39,7 +40,7 @@ class BolognaRepubblicaIT {
             }
 
             allArticles.push({
-                url, img, title, description
+                url, img, title, description, tags
             })
         });
 
