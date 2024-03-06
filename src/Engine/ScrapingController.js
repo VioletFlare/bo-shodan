@@ -2,6 +2,7 @@ const Scraper = require("../Services/Scraper/Scraper.js");
 const SourcesIndex = require("../Services/Scraper/SourcesIndex.js");
 const CronJob = require("cron").CronJob;
 const CronParser = require('cron-parser');
+const Localizer = require('./Localizer.js');
 
 class ScrapingController {
 
@@ -28,35 +29,36 @@ class ScrapingController {
                 } else {
                     console.error(`Couldn't attempt to insert article. Missing URL or Title: \n ${JSON.stringify(article)}`)
                 }
-            }   
+            }
         });
     }
-  
-    _runJob(source, response) {
-      if (response) {
-        this._handleResponse(response);
-      }
-      
-      this.$B.emit('Engine::ScheduleScraping', source);
-    }
-  
-    _handle(self, source) {
-      self.stop();
 
-      Scraper.scrap(source).then(
-          (response) => this._runJob(source, response)
-      );
+    _runJob(source, response) {
+        if (response) {
+            const localizedResponse = Localizer.run(source.url, response)
+            this._handleResponse(localizedResponse);
+        }
+
+        this.$B.emit('Engine::ScheduleScraping', source);
+    }
+
+    _handle(self, source) {
+        self.stop();
+
+        Scraper.scrap(source).then(
+            (response) => this._runJob(source, response)
+        );
     }
 
     _getRandomArbitraryInteger(min, max) {
         return Math.floor(Math.random() * (max - min) + min);
     }
-  
+
     _scheduleScraping(source) {
         const second = this._getRandomArbitraryInteger(5, 60);
         const minute = this._getRandomArbitraryInteger(5, 60);
         const pattern = `*/${second} */${minute} * * * *`;
-    
+
         const cronJob = new CronJob(
             pattern,
             () => this._handle(cronJob, source),
@@ -70,7 +72,7 @@ class ScrapingController {
 
         console.log('Scraping scheduled for: ' + source.url + ' at ' + runTime);
     }
-  
+
 
     _setEvents() {
         this.$B.on('Engine::ScheduleScraping', (source) => {
@@ -80,8 +82,9 @@ class ScrapingController {
 
     init() {
         this._setEvents();
-        //this._handle(new CronJob('* * * * * *'), SourcesIndex.BolognaTodayITHome);
-        
+        /*this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITEmiliaRomagna);
+        this._handle(new CronJob('* * * * * *'), SourcesIndex.MagazineUniboITHome);
+        */
         this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
         this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
         this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
