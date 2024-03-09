@@ -20,7 +20,8 @@ class NewsPublisher {
             url: article.url,
             description: article.description,
             img: article.img,
-            title: article.title
+            title: article.title,
+            tags: article.tags
         };
 
         NewsEmbed.send(model).catch(err => {

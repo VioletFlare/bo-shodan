@@ -38,6 +38,31 @@ class NewsEmbed {
                 console.error('Setting Image Error: ', e);
             }
         }
+
+        if (model.tags.length) {
+            try {
+                let tags = "Tags: ";
+
+                model.tags.forEach((tag, index) => {
+                    const isNotLastTag = model.tags.length != (index + 1);
+
+                    if (isNotLastTag) {
+                        tags += `${tag}, `;
+                    } else {
+                        tags += tag;
+                    }
+                });
+
+                if (tags.length > 2048) {
+                    tags = tags.substring(0, 2045) + "...";
+                }
+
+                embed.setFooter({ text: tags });
+            } catch (e) {  
+                console.error("Setting Tags Error: ", e);
+            }
+
+        }
         
         const embedContainer = { 
             embeds: [embed],
