@@ -1,3 +1,5 @@
+const LocalizerData = require('../Data/LocalizerData');
+
 class Localizer {
 
     constructor() {
@@ -17,7 +19,32 @@ class Localizer {
         const localizedArticles = [];
 
         articles.forEach((article) => {
+            let isValid = false;
+
             ///code for selecting articles
+            const splittedTitle = article.title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ");
+            const splittedDescription = article.description.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ");
+            let splittedTags = [];
+
+            article.tags.forEach(tag => {
+                const splittedTag = tag.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ");
+
+                splittedTags = splittedTags.concat(splittedTag);
+            });
+
+            const sum = splittedTitle.concat(splittedDescription).concat(splittedTags);
+
+            isValid = sum.some(value => {
+                const found = LocalizerData.find((localizerValue) => value.toLowerCase().includes(localizerValue));
+
+                if (found) {
+                    return true;
+                }
+            })
+
+            if (isValid) {
+                localizedArticles.push(article);
+            }
         });
 
         return localizedArticles;
