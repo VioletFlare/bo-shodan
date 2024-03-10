@@ -4,7 +4,8 @@ class Localizer {
 
     constructor() {
         this.sites = [
-            'ansa.it'
+            'ansa.it',
+            'rainews.it'
         ]
     }
 
