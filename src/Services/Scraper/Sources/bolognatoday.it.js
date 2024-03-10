@@ -9,11 +9,15 @@ class BolognaTodayITHome {
         const all = $('article');
 
         const articles = all.filter(":not([data-theme='today'] article)")
+                            .filter(":not([data-section-key='header-list-5'] article)")
+                            .filter(":not([data-section-key='special-focus-single-1'] article)")
+                            .filter("article:not(.c-story--editorial)");
 
         articles.each((i, article) => {
             let href = $('.o-link-text', article).attr('href').replace(/\?.+/, '');
             let url = '';
-            const tags = [];
+            let kicker = $('.c-story__kicker:not(.o-dot)', article).text().replace('\n', '').trim();
+            const tags = [kicker];
 
             if (href.indexOf('//') === 0) {
                 url = 'https:' + href;
@@ -47,7 +51,7 @@ class BolognaTodayITHome {
 
             allArticles.push({
                 url, img, title, description, tags
-            })
+            });
         });
 
         return allArticles;
