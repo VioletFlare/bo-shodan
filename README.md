@@ -22,7 +22,7 @@ docker run -i --cap-add=SYS_ADMIN --env ENV_FLAG=--dev boshodan:latest
 
 Dev without docker notes:
 
-To make puppeeter work, run:
+To make puppeteer work, run:
 ```
 npm run install-chrome
 ```
