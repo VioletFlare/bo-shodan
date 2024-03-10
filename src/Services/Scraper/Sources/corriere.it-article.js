@@ -17,6 +17,12 @@ class CorriereITArticle {
 
 		const tags = [];
 
+		const section = ldJson.articleSection;
+
+		if (section) {
+			tags.push(section);
+		}
+
 		if (isSpecialSection) {
 			title = $('h1.title').text().trim();
 			img = $('div.is-hero figure img').attr('src');
