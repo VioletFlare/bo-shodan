@@ -7,7 +7,8 @@
     "start": "node bo-shodan.js",
     "dev": "node bo-shodan.js --dev",
     "clean": "npm cache clean --force",
-    "test": "node ./tests/test.js --dev"
+    "test": "node ./tests/test.js --dev",
+    "install-chrome": "node node_modules/puppeteer/install.js"
   },
   "author": "VF",
   "license": "ISC",
