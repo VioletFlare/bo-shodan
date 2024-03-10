@@ -141,11 +141,16 @@ class MetroNewsITAjaxHTMLBologna {
         const $articles = $('a.catItemNoticeLeft')
 
         $articles.each((i, article) => {
+            const etichetta = $('.etichetta', article).text().replace('\n', '').trim();
             const url = $(article).attr('href').replace(/\?.+/, '');
             let img = $('img', article).attr('src');
             const title = $('.catTitleNotice', article).text().replace('\n', '');
             const description = $('.contentCatTextNotice', article).text().replace('\n', '');
             const tags = [];
+
+            if (etichetta) {
+               tags.push(etichetta);
+            }
 
 			allPosts.push({
 				url, img, title, description, tags
