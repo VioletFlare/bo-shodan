@@ -20,6 +20,13 @@ Dev:
 docker run -i --cap-add=SYS_ADMIN --env ENV_FLAG=--dev boshodan:latest 
 ```
 
+Dev without docker notes:
+
+To make puppeeter work, run:
+```
+npm run install-chrome
+```
+
 # Extensions (optional)
 
 This project uses docker ms-azuretools/vscode-docker extension for local development.
