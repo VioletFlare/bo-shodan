@@ -6,7 +6,8 @@ const Localizer = require('./Localizer.js');
 
 class ScrapingController {
 
-    constructor($B, DAL) {
+    constructor(config, $B, DAL) {
+        this.config = config;
         this.$B = $B;
         this.DAL = DAL;
     }
@@ -82,23 +83,18 @@ class ScrapingController {
 
     init() {
         this._setEvents();
-        /*this._handle(new CronJob('* * * * * *'), SourcesIndex.AnsaITEmiliaRomagna);
-        this._handle(new CronJob('* * * * * *'), SourcesIndex.MagazineUniboITHome);
-        */
-        this._scheduleScraping(SourcesIndex.MagazineUniboITHome);
-        this._scheduleScraping(SourcesIndex.AnsaITEmiliaRomagna);
-        this._scheduleScraping(SourcesIndex.BolognaTodayITHome);
-        this._scheduleScraping(SourcesIndex.IlRestoDelCarlinoITBologna);
-        this._scheduleScraping(SourcesIndex.CorriereITSiteSearchBologna);
-        this._scheduleScraping(SourcesIndex.BolognaInDirettaIT);
-        this._scheduleScraping(SourcesIndex.BolognaRepubblicaIT);
-        this._scheduleScraping(SourcesIndex.NotizieVirgilioITBologna);
-        this._scheduleScraping(SourcesIndex.GazzettaDiBolognaITViewAll);
-        this._scheduleScraping(SourcesIndex.MetroNewsITAjaxHTMLBologna);
-        this._scheduleScraping(SourcesIndex.BolognaNotizieCOM);
-        this._scheduleScraping(SourcesIndex.Bologna24OreIT);
-        this._scheduleScraping(SourcesIndex.ComuneBolognaITAjaxJson);
-        this._scheduleScraping(SourcesIndex.RainewsITHome);
+        
+        this.config.NewsConfig.sources.forEach(source => {
+            if (!this.config.NewsConfig.skipSchedule) {
+                this._scheduleScraping(source);
+            } else {
+                this._handle(new CronJob('* * * * * *'), source);
+            }
+        });
+
+        if (!this.config.NewsConfig.sources.length) {
+            console.error("Warning: sources in config empty!")
+        }
     }
 }
 

@@ -2,16 +2,21 @@ const NewsEmbed = require('../Embeds/NewsEmbed');
 
 class NewsPublisher {
     
-    constructor(config, channel, $B) {
-        this.config = config;
-        this.channel = channel;
+    constructor(channelFinder, $B) {
+        this.channelFinder = channelFinder;
         this.$B = $B;
     }
 
     start() {
-        this.$B.on("Engine::PublishArticle", (article) => {
-            this._sendNewsEmbed(article);
-        })
+        this.channel = this.channelFinder.find(this.channelFinder.config.NewsConfig.channel);
+
+        if (this.channel) {
+            this.$B.on("Engine::PublishArticle", (article) => {
+                this._sendNewsEmbed(article);
+            })
+        } else {
+            console.error("NewsPublisher couldn't start, channel not found.")
+        }
     }
 
     _sendNewsEmbed(article) {
