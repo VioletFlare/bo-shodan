@@ -23,7 +23,8 @@ class IlRestoDelCarlinoITBologna {
 
         articles.each((i, article) => {
             const url = $('h3 a', article).attr('href').replace(/\?.+/, '');
-            const tags = [];
+            const category = $('.card__category', article).text().replace('\n', '').trim();
+            const tags = [category];
             const srcset = $('img', article).attr('srcset');
 
             let img = '';
