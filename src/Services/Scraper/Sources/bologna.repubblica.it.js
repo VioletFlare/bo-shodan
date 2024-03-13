@@ -9,14 +9,14 @@ class BolognaRepubblicaIT {
 
     _getAllArticles($) {
         const allArticles = [];
-  
-        const all = $("article");
 
-        const articles = all.filter(`
-            :not(.box-bom article):not(gdwc-recommendations article):not(.widget-sponsor--container article)
-        `);
+        const $articles = $(".is-hard-news article") 
 
-        articles.each((i, article) => {
+        if (!$articles.length) {
+            console.error("BolognaRepubblicaIT: Couldn't scrape any articles. Should probably check that.")
+        }
+
+        $articles.each((i, article) => {
             let url = Utils.cleanUrl($('a', article).attr('href'));
             const title = $('h2', article).text().replace('\n', '').trim();
             const description = $('.entry__summary', article).text().replace('\n', '').trim();
