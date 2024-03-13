@@ -8,7 +8,18 @@ class IlRestoDelCarlinoITBologna {
 
     _getAllArticles($) {
         const allArticles = [];
-        const articles = $('article');
+        const $mainArticles = $('[class*="Homepage_container"] > div > section[class*="vaschetta"] article');
+        const $sidecar = $('[class*="sidecar__main"] article');
+
+        if (!$mainArticles.length) {
+            console.error("IlRestoDelCarlinoITBologna: Couldn't scrape main articles. Should probably check that.")
+        } 
+
+        if (!$sidecar.length) {
+            console.error("IlRestoDelCarlinoITBologna: Couldn't scrape sidecar articles. Should probably check that.")
+        }
+
+        const articles = $mainArticles.add($sidecar);
 
         articles.each((i, article) => {
             const url = $('h3 a', article).attr('href').replace(/\?.+/, '');
