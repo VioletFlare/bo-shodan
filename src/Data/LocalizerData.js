@@ -342,7 +342,7 @@ const regular = [
     "bargellinesi",
     "cà de fabbriesi",
     "castel campeggiesi",
-    "madonnasi",
+    "madonnesi",
     "settecanesi",
     "solignanesi",
     "montalesi",

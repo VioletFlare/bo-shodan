@@ -19,6 +19,14 @@ module.exports = {
             SourcesIndex.ComuneBolognaITAjaxJson,
             SourcesIndex.RainewsITHome
         ],
+        plugins: {
+            localizer: {
+                sites: [
+                    'ansa.it',
+                    'rainews.it'
+                ]
+            },
+        },
         skipSchedule: false
     }
 };

@@ -4,8 +4,16 @@ module.exports = {
     NewsConfig: {
         channel: "┋📰・notizie",
         sources: [
-            SourcesIndex.RainewsITHome,
+            SourcesIndex.AnsaITEmiliaRomagna,
         ],
+        plugins: {
+            localizer: {
+                sites: [
+                    'ansa.it',
+                    'rainews.it'
+                ]
+            },
+        },
         skipSchedule: true
     }
 };
