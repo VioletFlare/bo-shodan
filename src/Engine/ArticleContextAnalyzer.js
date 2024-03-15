@@ -34,17 +34,15 @@ class ArticleContextAnalyzer {
     }
 
     _extractContext(article) {
-        const splittedTitle = article.title.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(" ");
-        const splittedDescription = article.description.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(" ");
-        let splittedTags = [];
+        const title = article.title.toLowerCase();
+        const description = article.description.toLowerCase();
+        let tags = "";
 
         article.tags.forEach(tag => {
-            const splittedTag = tag.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").split(" ");
-
-            splittedTags = splittedTags.concat(splittedTag);
+            tags += tag.toLowerCase() + " ";
         });
 
-        const context = splittedTitle.concat(splittedDescription).concat(splittedTags);
+        const context = title + " " + description + " " + tags;
 
         return context;
     }
@@ -60,12 +58,10 @@ class ArticleContextAnalyzer {
 
                 const context = this._extractContext(article);
 
-                isValid = context.some(value => {
-                    let found = false;
+                LocalizerData.some(localizerValue => {
+                    isValid = context.includes(localizerValue);
 
-                    found = LocalizerData.find((localizerValue) => value.toLowerCase().includes(localizerValue));
-
-                    if (found) {
+                    if (isValid) {
                         return true;
                     }
                 })
