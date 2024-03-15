@@ -2,7 +2,7 @@ const Scraper = require("../Services/Scraper/Scraper.js");
 const SourcesIndex = require("../Services/Scraper/SourcesIndex.js");
 const CronJob = require("cron").CronJob;
 const CronParser = require('cron-parser');
-const Localizer = require('./Localizer.js');
+const ArticleContextAnalyzer = require('./ArticleContextAnalyzer.js');
 
 class ScrapingController {
 
@@ -36,8 +36,8 @@ class ScrapingController {
 
     _runJob(source, response) {
         if (response) {
-            const localizedResponse = Localizer.run(source.url, response)
-            this._handleResponse(localizedResponse);
+            const filteredResponse = new ArticleContextAnalyzer(this.config).run(source.url, response)
+            this._handleResponse(filteredResponse);
         }
 
         this.$B.emit('Engine::ScheduleScraping', source);
