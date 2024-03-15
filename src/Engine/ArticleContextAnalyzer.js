@@ -47,8 +47,6 @@ class ArticleContextAnalyzer {
         return context;
     }
 
-    _shouldBeLocalize
-
     _run(articles) {
         const filteredArticles = [];
 
