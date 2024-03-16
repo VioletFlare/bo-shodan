@@ -11,7 +11,8 @@ const newsArticleSchema = new Schema(NewsArticle, {
     content: { type: 'text' },
     tags: { type: 'string[]' },
     metaScrapedAtTimestamp: { type: 'date' },
-    metaPublishedOnDiscord: { type: 'boolean' }
+    metaPublishedOnDiscord: { type: 'boolean' },
+    metaIsHot: { type: 'boolean' }
 });
 
 module.exports = Connection.start().then(c => {

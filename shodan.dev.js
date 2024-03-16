@@ -15,5 +15,8 @@ module.exports = {
             },
         },
         skipSchedule: true
+    },
+    HotConfig: {
+        channel: "┋🔥・hot"
     }
 };

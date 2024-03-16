@@ -8,20 +8,30 @@ class NewsPublisher {
     }
 
     start() {
-        this.channel = this.channelFinder.find(this.channelFinder.config.NewsConfig.channel);
+        this.defaultChannel = this.channelFinder.find(this.channelFinder.config.NewsConfig.channel);
+        this.hotChannel = this.channelFinder.find(this.channelFinder.config.HotConfig.channel);
 
-        if (this.channel) {
+        if (!this.defaultChannel) {
+            console.error("NewsPublisher couldn't find the default channel.")
+        } else if (!this.hotChannel) {
+            console.error("NewsPublisher couldn't find the hot channel.")
+        } else {
             this.$B.on("Engine::PublishArticle", (article) => {
                 this._sendNewsEmbed(article);
             })
-        } else {
-            console.error("NewsPublisher couldn't start, channel not found.")
         }
+
     }
 
     _sendNewsEmbed(article) {
+        let channel = this.defaultChannel;
+
+        if (article.metaIsHot) {
+            channel = this.hotChannel;
+        }
+
         const model = {
-            channel: this.channel,
+            channel: channel,
             url: article.url,
             description: article.description,
             img: article.img,
