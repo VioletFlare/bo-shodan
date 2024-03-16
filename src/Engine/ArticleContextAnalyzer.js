@@ -1,4 +1,5 @@
 const LocalizerData = require('../Data/LocalizerData');
+const { HotThemes, HotThemesWords } = require('../Data/HotThemesData');
 
 class ArticleContextAnalyzer {
 
@@ -49,26 +50,24 @@ class ArticleContextAnalyzer {
 
     _run(articles) {
         const filteredArticles = [];
+        
+        articles.forEach((article) => {
+            let isValid = false;
 
-        if (this.isLocalizerEnabled) {
-            articles.forEach((article) => {
-                let isValid = false;
+            const context = this._extractContext(article);
 
-                const context = this._extractContext(article);
-
-                LocalizerData.some(localizerValue => {
-                    isValid = context.includes(localizerValue);
-
-                    if (isValid) {
-                        return true;
-                    }
-                })
+            LocalizerData.some(localizerValue => {
+                isValid = context.includes(localizerValue);
 
                 if (isValid) {
-                    filteredArticles.push(article);
+                    return true;
                 }
-            });
-        };
+            })
+
+            if (isValid) {
+                filteredArticles.push(article);
+            }
+        });
 
         return filteredArticles;
     }
