@@ -8,7 +8,7 @@ class BolognaNotizieCOM {
     _getAllArticles($) {
         const allArticles = [];
   
-        const $articles = $("article > article");
+        const $articles = $("article > article > .d-sm-block");
 
         $articles.each((i, article) => {
             const title = $('h2', article).text().replace('\n', '').trim();
